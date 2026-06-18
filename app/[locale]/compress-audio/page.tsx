@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export async function generateStaticParams() {
-  const locales = ["en","tr","de","fr","es","it","pt","ja","zh","nl","pl","ko","sv","vi","da","no","hu","fi"];
+  const locales = ["en","tr","de","fr","es","it","pt","ja","zh","nl","pl","ko","sv","da","no","hu","fi"];
   return locales.map((locale) => ({ locale }));
 }
 

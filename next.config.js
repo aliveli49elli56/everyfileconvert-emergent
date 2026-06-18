@@ -16,12 +16,26 @@ const nextConfig = {
     ];
   },
 
-  // BU BÖLÜMÜ EKLE:
   async rewrites() {
     return [
       {
         source: '/sitemap.xml',
-        destination: '/sitemap/0.xml', 
+        destination: '/sitemap/0.xml',
+      },
+    ];
+  },
+
+  async redirects() {
+    return [
+      {
+        source: '/vi',
+        destination: '/en',
+        permanent: true,
+      },
+      {
+        source: '/vi/:path*',
+        destination: '/en/:path*',
+        permanent: true,
       },
     ];
   },

@@ -4,7 +4,7 @@ const BASE_URL = "https://www.everyfileconvert.com";
 
 const LOCALES = [
   "en", "tr", "de", "fr", "es", "it", "pt", "ja",
-  "zh", "nl", "pl", "ko", "sv", "vi", "da", "no", "hu", "fi",
+  "zh", "nl", "pl", "ko", "sv", "da", "no", "hu", "fi",
 ] as const;
 
 const CHUNK_SIZE = 1000;

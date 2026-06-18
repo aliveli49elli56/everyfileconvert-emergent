@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export const locales = ["en", "tr", "de", "fr", "es", "it", "pt", "ja", "zh", "nl", "pl", "ko", "sv", "vi", "da", "no", "hu", "fi"] as const;
+export const locales = ["en", "tr", "de", "fr", "es", "it", "pt", "ja", "zh", "nl", "pl", "ko", "sv", "da", "no", "hu", "fi"] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "en";
 
@@ -19,7 +19,6 @@ const localeLanguageMap: Record<string, Locale> = {
   pl: "pl", "pl-PL": "pl",
   ko: "ko", "ko-KR": "ko",
   sv: "sv", "sv-SE": "sv",
-  vi: "vi", "vi-VN": "vi",
   da: "da", "da-DK": "da",
   no: "no", "nb": "no", "nn": "no", "nb-NO": "no", "nn-NO": "no",
   hu: "hu", "hu-HU": "hu",
@@ -59,8 +58,6 @@ const countryLocaleMap: Record<string, Locale> = {
   KR: "ko",
   // Swedish-speaking
   SE: "sv",
-  // Vietnamese-speaking
-  VN: "vi",
   // Turkish-speaking
   TR: "tr",
 };
