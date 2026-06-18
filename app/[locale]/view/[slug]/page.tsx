@@ -5,6 +5,7 @@ import Link from "next/link";
 import { locales } from "@/lib/i18n/config";
 import { VIEWER_REGISTRY, getViewerByExt } from "@/lib/config/viewer-registry";
 import FileViewer from "@/components/viewer/FileViewer";
+import ViewHistory from "@/components/viewer/ViewHistory";
 
 export async function generateStaticParams() {
   const params: { locale: string; slug: string }[] = [];
@@ -74,6 +75,7 @@ export default async function ViewerSlugPage({
         {/* Viewer — my-12 for AdSense safety */}
         <div className="my-12">
           <FileViewer locale={locale} presetFormat={fmt.ext} />
+          <ViewHistory locale={locale} />
         </div>
 
         {/* How to use */}

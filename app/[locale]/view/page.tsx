@@ -4,6 +4,7 @@ import { Eye } from "lucide-react";
 import { locales, type Locale } from "@/lib/i18n/config";
 import { VIEWER_REGISTRY, getViewerCategories, VIEWER_CATEGORY_META } from "@/lib/config/viewer-registry";
 import ViewerHub from "@/components/viewer/ViewerHub";
+import ViewHistory from "@/components/viewer/ViewHistory";
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -44,6 +45,7 @@ export default async function ViewerHubPage({ params }: { params: Promise<{ loca
 
       {/* Hub grid */}
       <section className="container mx-auto px-4 py-12">
+        <ViewHistory locale={locale} />
         <ViewerHub locale={locale} />
       </section>
     </div>

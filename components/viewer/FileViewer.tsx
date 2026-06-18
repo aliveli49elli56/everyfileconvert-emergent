@@ -6,6 +6,7 @@ import {
   type ViewerFormat, type ViewerEngine,
   VIEWER_LIMITS, getViewerByExt,
 } from "@/lib/config/viewer-registry";
+import { addToViewHistory } from "./ViewHistory";
 
 // ── Sub-viewer imports (lazy) ──────────────────────────────────────────────
 const PdfViewer  = dynamic(() => import("./viewers/PdfViewer"),  { loading: Spinner });
@@ -61,7 +62,9 @@ export default function FileViewer({ locale, presetFormat }: Props) {
     setSizeError(false);
     setFile(f);
     setFormat(fmt ?? null);
-  }, []);
+    // Record in view history
+    addToViewHistory({ name: f.name, ext, size: f.size, locale });
+  }, [locale]);
 
   const onDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();

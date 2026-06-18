@@ -14,19 +14,23 @@ export default function PsdViewer({ file }: { file: File }) {
         const buf = await file.arrayBuffer();
         const psd = readPsd(buf, { skipLayerImageData: true, skipThumbnail: false });
 
-        // Use the merged image if available
-        const img = psd.imageData ?? psd.canvas;
-        if (!img) throw new Error("No image data in PSD");
-
         const canvas = canvasRef.current!;
         canvas.width = psd.width;
         canvas.height = psd.height;
         const ctx = canvas.getContext("2d")!;
 
-        if (img instanceof ImageData) {
-          ctx.putImageData(img, 0, 0);
+        // ag-psd gives us a canvas element in browser mode
+        if (psd.canvas) {
+          ctx.drawImage(psd.canvas as unknown as CanvasImageSource, 0, 0);
+        } else if (psd.imageData) {
+          const imgData = new ImageData(
+            new Uint8ClampedArray((psd.imageData as any).data),
+            psd.width,
+            psd.height
+          );
+          ctx.putImageData(imgData, 0, 0);
         } else {
-          ctx.drawImage(img, 0, 0);
+          throw new Error("No renderable image data found in PSD");
         }
         setDims({ w: psd.width, h: psd.height });
         setLoading(false);

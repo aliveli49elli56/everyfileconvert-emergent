@@ -45,9 +45,9 @@ async function extractTextFromEpub(file: File): Promise<string> {
         const opf = await opfFile.async('text');
         const baseDir = m[1].includes('/') ? m[1].substring(0, m[1].lastIndexOf('/') + 1) : '';
         const idRefs: string[] = [];
-        const spineMatches = opf.matchAll(/<itemref[^>]+idref="([^"]+)"/g);
+        const spineMatches = Array.from(opf.matchAll(/<itemref[^>]+idref="([^"]+)"/g));
         for (const sm of spineMatches) idRefs.push(sm[1]);
-        const itemMatches = opf.matchAll(/<item[^>]+id="([^"]+)"[^>]+href="([^"]+)"/g);
+        const itemMatches = Array.from(opf.matchAll(/<item[^>]+id="([^"]+)"[^>]+href="([^"]+)"/g));
         const idToHref: Record<string, string> = {};
         for (const im of itemMatches) idToHref[im[1]] = im[2];
         spine = idRefs.map(id => {

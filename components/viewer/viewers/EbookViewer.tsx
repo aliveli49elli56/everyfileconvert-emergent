@@ -23,9 +23,9 @@ export default function EbookViewer({ file }: { file: File }) {
             const opf = await zip.file(m[1])?.async("text") ?? "";
             const base = m[1].includes("/") ? m[1].slice(0, m[1].lastIndexOf("/") + 1) : "";
             const ids: string[] = [];
-            for (const sm of opf.matchAll(/<itemref[^>]+idref="([^"]+)"/g)) ids.push(sm[1]);
+            for (const sm of Array.from(opf.matchAll(/<itemref[^>]+idref="([^"]+)"/g))) ids.push(sm[1]);
             const idToHref: Record<string, string> = {};
-            for (const im of opf.matchAll(/<item[^>]+id="([^"]+)"[^>]+href="([^"]+)"/g)) idToHref[im[1]] = im[2];
+            for (const im of Array.from(opf.matchAll(/<item[^>]+id="([^"]+)"[^>]+href="([^"]+)"/g))) idToHref[im[1]] = im[2];
             spine = ids.map(id => base + (idToHref[id] ?? "")).filter(Boolean);
           }
         }

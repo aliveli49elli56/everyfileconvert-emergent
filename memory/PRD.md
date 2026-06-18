@@ -52,7 +52,17 @@ Multi-language (17 locales), programmatic SEO, zero server-side processing.
 - docx-preview
 - ag-psd
 
-## Prioritized Backlog
+### 2025-06-18: View History Feature (localStorage)
+- ViewHistory.tsx component: shows recently viewed files with filename, ext badge, size, relative time
+- Persists up to 12 entries in localStorage; cross-tab sync via custom "viewer-history-updated" event
+- Clear-all + per-entry remove buttons
+- Shown on both /view hub and individual /view/[slug] pages
+- FileViewer.tsx automatically records every successfully opened file
+
+### Build Results (next build — Done in 97s)
+- 901 viewer static pages generated (/en/view/pdf through /fi/view/epub)
+- Sitemap chunks: 6 files (0-5.xml), viewer URLs added to pool
+- Zero TypeScript errors, zero build failures
 - P0: ✅ Complete
 - P1: Test all viewer engines with real files in production
 - P1: Add DWG viewer (requires WASM port)

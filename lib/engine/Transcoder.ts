@@ -30,6 +30,7 @@ export type TranscodeOp =
 // ── Options ────────────────────────────────────────────────────────────────────
 export interface TranscodeOptions {
   // Format
+  sourceFormat?: string;
   targetFormat?: string;
   quality?: number; // 0–100
 
