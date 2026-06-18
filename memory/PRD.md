@@ -124,7 +124,16 @@ Multi-language (17 locales), programmatic SEO, zero server-side processing.
 - DXF CAD Viewer with SVG rendering, zoom controls, dark canvas ✅
 - RAR Archive Viewer with node-unrar-js WASM ✅
 
-### Phase 4: Future Work (Backlog)
+### Phase 4: Mobile-Only Infeed Banners (2026-06-18)
+- **Category pages** (video, audio, image, pdf-tools): Mobile-only (`md:hidden`) 336×280 infeed banner eklendi, "All X Tools" başlığı altındaki açıklama cümlesinin hemen altına
+  - data-testid: `ad-video-tools-mobile`, `ad-audio-tools-mobile`, `ad-image-tools-mobile`, `ad-pdf-tools-mobile`
+  - AdSlot adUnit: `video/audio/image/pdf_tools_mobile-336x280`
+- **ViewerHub** (`/view`): 2 adet mobile-only banner eklendi
+  - Spreadsheet kategorisi sonrasına (presentation'dan önce): `ad-viewer-mobile-after-spreadsheet`
+  - Video kategorisi sonrasına (audio'dan önce): `ad-viewer-mobile-after-video`
+  - `MOBILE_AD_AFTER: ViewerCategory[]` array ile yönetilir, `Fragment` key pattern ile CLS önlenir
+
+### Phase 5: Future Work (Backlog)
 - DWG viewer (proprietary format, needs specialized WASM — very complex)
 - 7z archive viewer support
 - PPTX complex shape/image support improvements

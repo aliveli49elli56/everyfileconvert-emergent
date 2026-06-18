@@ -19,6 +19,7 @@ import {
   Rewind,
 } from "lucide-react";
 import UniversalDropzone from "@/components/UniversalDropzone";
+import AdSlot from "@/components/ads/ad-slot";
 import { getDictionary, getHreflangLinks } from "@/lib/i18n/config";
 import type { Locale } from "@/lib/i18n/config";
 
@@ -137,6 +138,11 @@ export default async function LocaleVideoConverterPage({ params }: PageProps) {
           <div className="max-w-4xl mx-auto text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">All Video Tools</h2>
             <p className="text-slate-500">Convert, trim, compress, and extract — everything for your video files.</p>
+            {/* Mobile-only infeed banner */}
+            <div className="md:hidden flex justify-center mt-6" data-testid="ad-video-tools-mobile">
+              {/* <!-- REKLAM KODU BURAYA GELECEK --> */}
+              <AdSlot adUnit="video_tools_mobile-336x280" width={336} height={280} />
+            </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-6xl mx-auto">
             {tools.map((tool) => (
