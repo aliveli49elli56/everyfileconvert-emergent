@@ -22,13 +22,15 @@ export default function CadViewer({ file }: { file: File }) {
         // The dxf library defaults to black strokes (rgb(0,0,0) / #000000).
         // Our canvas is dark (slate-950), so we remap pure-black to a bright teal
         // to maintain the classic dark-background CAD aesthetic.
+        // Also boost stroke-width for better visibility.
         const visibleSvg = rawSvg
           .replace(/stroke="rgb\(\s*0\s*,\s*0\s*,\s*0\s*\)"/gi, 'stroke="#4ade80"')
           .replace(/stroke="#000000"/gi, 'stroke="#4ade80"')
           .replace(/stroke="#000(?!")"/gi, 'stroke="#4ade80"')
           .replace(/fill="rgb\(\s*0\s*,\s*0\s*,\s*0\s*\)"/gi, 'fill="none"')
           .replace(/fill="#000000"/gi, 'fill="none"')
-          .replace(/fill="#000(?!")"/gi, 'fill="none"');
+          .replace(/fill="#000(?!")"/gi, 'fill="none"')
+          .replace(/stroke-width="0\.1%"/gi, 'stroke-width="0.3%"');
         setSvg(visibleSvg);
       } catch (e: any) {
         setError(e.message || "Could not render this DXF/CAD file");

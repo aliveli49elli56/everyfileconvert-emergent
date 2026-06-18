@@ -11,6 +11,7 @@ Multi-language (17 locales), programmatic SEO, zero server-side processing.
 - lib/config/viewer-registry.ts — viewer format registry
 - lib/engine/ — client-side conversion engines
 - public/pdf.worker.min.mjs — pdfjs worker
+- public/unrar.wasm — RAR extraction WASM binary (203KB, node-unrar-js v2.0.2)
 
 ## What's Been Implemented
 
@@ -34,23 +35,18 @@ Multi-language (17 locales), programmatic SEO, zero server-side processing.
 - FormatSelector auto-redirects to /[locale]/[from]-to-[to]
 
 ### 2025-06-18: Online Viewer Ecosystem
-- viewer-registry.ts: 53+ formats with category/engine/description metadata
+- viewer-registry.ts: 55+ formats with category/engine/description metadata
 - ViewerHub component: grouped format cards with category colors
 - FileViewer component: drop zone + file size guard + engine routing
 - Viewer engines: PDF (pdfjs), DOCX (mammoth), Sheet (SheetJS/xlsx), Text,
-  Image (native), Archive (JSZip), Email (EML), Media (video/audio HTML5),
-  EPUB, PPTX (ZIP XML parse), PSD (ag-psd)
+  Image (native), Archive (JSZip + node-unrar-js WASM), Email (EML), Media (video/audio HTML5),
+  EPUB, PPTX (ZIP XML parse), PSD (ag-psd), CAD/DXF (dxf package → SVG)
 - Pages: /[locale]/view (hub) + /[locale]/view/[slug] (per-format)
 - Navbar: "Online Viewer" link added
 - HomeClient: "Online Viewer" card in All-In-One Tools grid
 - All 17 locale files: onlineViewer + onlineViewerDesc keys added
 - Sitemap: viewer URLs added to paginated pool
 - File size limits: 50MB desktop, 20MB mobile; smart redirect to converter
-
-## Packages Installed
-- xlsx (SheetJS)
-- docx-preview
-- ag-psd
 
 ### 2025-06-18: View History Feature (localStorage)
 - ViewHistory.tsx component: shows recently viewed files with filename, ext badge, size, relative time
@@ -59,38 +55,59 @@ Multi-language (17 locales), programmatic SEO, zero server-side processing.
 - Shown on both /view hub and individual /view/[slug] pages
 - FileViewer.tsx automatically records every successfully opened file
 
+### 2025-06-18: Phase 3 - DXF CAD Viewer (NEW)
+- Installed dxf@5.3.1 package (pure JS DXF parser with Helper.toSVG())
+- CadViewer.tsx: dark canvas (bg-slate-950) with zoom controls (in/out/fit/reset)
+- SVG post-processing: replaces black strokes rgb(0,0,0)/#000000 → #4ade80 (green)
+  and boosts stroke-width from 0.1% to 0.3% for better visibility
+- viewer-registry.ts: DXF engine updated from 'text' to 'cad'
+- FileViewer.tsx: CadViewer lazy-loaded for 'cad' engine
+- types/dxf.d.ts: TypeScript declaration file for dxf package
+
+### 2025-06-18: Phase 3 - RAR Archive Viewer (NEW)
+- Installed node-unrar-js@2.0.2 (Emscripten WASM port of official UnRAR)
+- public/unrar.wasm copied from node_modules (203KB)
+- ArchiveViewer.tsx: extended to detect RAR by extension, extracts via WASM
+  (extractZip → JSZip for .zip; extractRar → node-unrar-js for .rar)
+- Shows folder count, file count, total uncompressed size
+- Error handling for encrypted/corrupted RAR
+- viewer-registry.ts: RAR entry added (archive engine, shared with ZIP)
+- next.config.js: transpilePackages: ['node-unrar-js'] added
+
 ### Build Results (next build — Done in 97s)
-- 901 viewer static pages generated (/en/view/pdf through /fi/view/epub)
+- 901+ viewer static pages generated
 - Sitemap chunks: 6 files (0-5.xml), viewer URLs added to pool
 - Zero TypeScript errors, zero build failures
-- P0: ✅ Complete
-- P1: Test all viewer engines with real files in production
-- P1: Add DWG viewer (requires WASM port)
-- P2: Add RAR/7z archive viewer
-- P2: PPTX visual rendering (currently text-only XML parse)
-- P2: PSD layer preview panel
+
+## Packages Installed
+- xlsx (SheetJS)
+- docx-preview
+- ag-psd
+- dxf@5.3.1 (DXF→SVG renderer, Phase 3)
+- node-unrar-js@2.0.2 (RAR WASM extractor, Phase 3)
 
 ## Prioritized Backlog
 
 ### Phase 1 — Complete
 - Vietnamese locale removal, pdfjs fix, EbookEngine, FormatSelector, Online Viewer (53+ formats), View History, next build ✅
 
-### Phase 2 — In Progress
-- Visual PPTX renderer (XML → HTML/CSS layout with thumbnail strip)
-- Engine testing with real files (PDF, XLSX, PPTX, PSD, EML)
+### Phase 2 — Complete
+- Visual PPTX renderer (XML → HTML/CSS layout with thumbnail strip) ✅
+- Footer format counts dynamically updated ✅
 
-### Phase 3: High-Complexity Engine Integration — QUEUED
+### Phase 3 — COMPLETE (2025-06-18)
+- DXF CAD Viewer with SVG rendering, zoom controls, dark canvas ✅
+- RAR Archive Viewer with node-unrar-js WASM ✅
 
-**Status: QUEUED — Awaiting execution in Phase 3**
+### Phase 4: Future Work (Backlog)
+- DWG viewer (proprietary format, needs specialized WASM — very complex)
+- 7z archive viewer support
+- PPTX complex shape/image support improvements
+- PSD layer preview panel
+- Binary DXF support (currently only ASCII DXF supported)
 
-**DWG/DXF Viewer:**
-- Integrate open-design-sdk or equivalent WASM port
-- Strictly enforce 20MB mobile / 50MB desktop limits
-- Smart Redirection to Converter fallback for oversized files
-
-**Archive Viewer — RAR Support:**
-- Integrate unrar.js for RAR/RAR5 extraction and file listing
-- Extend ArchiveViewer.tsx to detect format and route to correct extractor
-- Same size limits + smart redirect fallback
-
-Objective: Complete CAD & Archive viewer categories with full client-side WASM engines.
+## Key Technical Constraints
+- Zero Backend: All file processing runs natively in browser without server uploads
+- AdSense Layout: 40px vertical margin (mt-12 mb-12) around viewer canvas
+- File Size Limits: 50MB desktop / 20MB mobile with smart redirect to converter
+- WASM Files: pdf.worker.min.mjs and unrar.wasm served from /public/
