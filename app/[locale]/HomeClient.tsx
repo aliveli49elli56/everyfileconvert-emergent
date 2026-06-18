@@ -17,6 +17,7 @@ import {
   FileImage,
 } from "lucide-react";
 import UniversalDropzone from "@/components/UniversalDropzone";
+import FormatSelector from "@/components/FormatSelector";
 import {
   CONVERSION_MATRIX,
   FORMAT_REGISTRY,
@@ -144,29 +145,17 @@ export default function HomeClient({ dict, locale }: { dict: DictType; locale: L
         </div>
       </section>
 
-      <section className="py-16 bg-white">
+      <section className="py-12 xl:-mx-44 bg-gradient-to-br from-sky-50 via-blue-50 to-yellow-50/40">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-3">
               {typeof dict.supportedFormats === "string" ? dict.supportedFormats : "Supported Formats"}
             </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            <p className="text-base text-slate-600 max-w-xl mx-auto">
               {(typeof dict.supportedFormatsDesc === "string" ? dict.supportedFormatsDesc : "We support {count} different file formats").replace("{count}", String(totalFormats))}
             </p>
           </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3 max-w-5xl mx-auto">
-            {FORMAT_REGISTRY.map((format) => (
-                <div key={format.ext} className="group relative px-4 py-3 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-md transition-all cursor-default">
-                  <div className="text-center">
-                    <span className="text-sm font-semibold text-slate-700 group-hover:text-slate-900">.{format.ext.toUpperCase()}</span>
-                    <p className="text-xs text-slate-400 mt-1 truncate">{format.name.split(" ")[0]}</p>
-                  </div>
-                  <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-              ))
-            }
-          </div>
+          <FormatSelector locale={locale} />
         </div>
       </section>
 
