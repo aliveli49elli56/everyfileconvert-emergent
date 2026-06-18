@@ -97,10 +97,14 @@ async function parsePptx(file: File): Promise<{ slides: Slide[]; w: number; h: n
       const xfrm = /a:xfrm[\s\S]*?\/a:xfrm/.exec(sp)?.[0] ?? "";
       const off = /a:off[^/]+/.exec(xfrm)?.[0] ?? "";
       const ext = /a:ext[^/]+/.exec(xfrm)?.[0] ?? "";
-      const x  = parseInt(attr(off, "a:off", "x") || "0") * EMU2PX;
-      const y  = parseInt(attr(off, "a:off", "y") || "0") * EMU2PX;
-      const cx = parseInt(attr(ext, "a:ext", "cx") || "0") * EMU2PX;
-      const cy = parseInt(attr(ext, "a:ext", "cy") || "0") * EMU2PX;
+      const slideWpx = slideW * EMU2PX;
+      const slideHpx = slideH * EMU2PX;
+      const hasBounds = xfrm.includes("a:off") && xfrm.includes("a:ext");
+      // Fallback: shapes without explicit bounds fill the slide
+      const x  = hasBounds ? parseInt(attr(off, "a:off", "x") || "0") * EMU2PX : slideWpx * 0.05;
+      const y  = hasBounds ? parseInt(attr(off, "a:off", "y") || "0") * EMU2PX : shapes.length * slideHpx * 0.18;
+      const cx = hasBounds ? (parseInt(attr(ext, "a:ext", "cx") || "0") * EMU2PX) || slideWpx * 0.9 : slideWpx * 0.9;
+      const cy = hasBounds ? (parseInt(attr(ext, "a:ext", "cy") || "0") * EMU2PX) || slideHpx * 0.18 : slideHpx * 0.18;
 
       // Text paragraphs
       const txBody = /p:txBody[\s\S]*?\/p:txBody/.exec(sp)?.[0] ?? "";

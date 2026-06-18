@@ -62,7 +62,8 @@ function formatRelativeTime(ts: number): string {
   return `${Math.floor(hrs / 24)}d ago`;
 }
 
-function formatSize(bytes: number): string {
+function formatSize(bytes?: number): string {
+  if (bytes == null || isNaN(bytes)) return "—";
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1_048_576) return `${(bytes / 1024).toFixed(1)} KB`;
   return `${(bytes / 1_048_576).toFixed(1)} MB`;
