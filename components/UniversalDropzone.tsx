@@ -43,6 +43,13 @@ export interface UniversalDropzoneProps {
 
 type FileStatus = 'pending' | 'processing' | 'done' | 'error';
 
+// Persistent Ad Slot architecture: 3 phases
+// - idle     : no files selected yet       → drag_menu_under visible
+// - pending  : files selected, not started → drag_menu_under visible
+// - converting: transcoding in progress    → no ad (avoid click accidents)
+// - success  : all files converted         → download_ready_ad visible
+type ConversionStatus = 'idle' | 'pending' | 'converting' | 'success';
+
 interface FileEntry {
   id: string;
   originalName: string;
@@ -126,6 +133,41 @@ function resolveDisplayName(base: string, taken: Set<string>): string {
 }
 
 // processFile removed — real transcoding is done via Transcoder.run() in runSequential
+
+// ─── Persistent Ad Slot ───────────────────────────────────────────────────────
+// DOM'dan kaldırılmaz (no unmount) — CLS'yi önlemek ve AdSense yeniden yüklemeyi
+// engellemek için display: block/none (Tailwind hidden/block) ile yönetilir.
+// minHeight: 250px → reklam içeriği yüklenmeden önce alanı rezerve eder.
+function PersistentAdSlot({ slotName, isVisible }: { slotName: string; isVisible: boolean }) {
+  return (
+    <div
+      className={cn('ad-container mt-12 mb-12', isVisible ? 'block' : 'hidden')}
+      style={{ minHeight: '250px' }}
+      data-testid={`persistent-ad-${slotName}`}
+    >
+      <div className="w-full h-[250px] bg-gray-100 flex flex-col items-center justify-center border border-gray-200 rounded-xl gap-1">
+        <span className="text-[10px] text-gray-400 tracking-widest uppercase font-medium">
+          Advertisement
+        </span>
+        <span className="text-[9px] text-gray-300 tracking-wide">
+          {slotName}
+        </span>
+        {/*
+          İleride buraya AdSense scripti eklenecek:
+          <ins
+            className="adsbygoogle"
+            style={{ display: 'block' }}
+            data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+            data-ad-slot="XXXXXXXXXX"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          />
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        */}
+      </div>
+    </div>
+  );
+}
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
@@ -428,6 +470,19 @@ export default function UniversalDropzone({ allowedTypes, mode = 'all', onFileSe
   const sourceCategory = sourceEntry?.category;
   const categoryMeta = sourceCategory ? CATEGORY_META[sourceCategory] : null;
 
+  // ── ConversionStatus — reklam görünürlüğünü yönetir ──────────────────────
+  // idle      → drag_menu_under göster  (henüz dosya yok)
+  // pending   → drag_menu_under göster  (dosya seçildi ama dönüştürülmedi)
+  // converting→ reklam yok             (kullanıcı aktif işlem yapıyor)
+  // success   → download_ready_ad göster (tüm dosyalar dönüştürüldü)
+  const conversionStatus: ConversionStatus = !hasFiles
+    ? 'idle'
+    : isRunning
+      ? 'converting'
+      : allDone
+        ? 'success'
+        : 'pending';
+
   // ─────────────────────────────────────────────────────────────────────────
 
   return (
@@ -652,6 +707,25 @@ export default function UniversalDropzone({ allowedTypes, mode = 'all', onFileSe
           </button>
         </div>
       )}
+
+      {/*
+        ── Persistent Ad Slots ─────────────────────────────────────────────
+        Her iki slot da DOM'da KALIR. Sadece Tailwind hidden/block ile
+        görünürlük değiştirilir → AdSense yeniden yükleme yok, CLS yok.
+
+        drag_menu_under   → idle / pending durumlarında görünür
+        download_ready_ad → success durumunda görünür
+        converting        → hiçbir reklam gösterilmez (yanlış tıklama riski)
+      */}
+      <PersistentAdSlot
+        slotName="drag_menu_under"
+        isVisible={conversionStatus === 'idle' || conversionStatus === 'pending'}
+      />
+      <PersistentAdSlot
+        slotName="download_ready_ad"
+        isVisible={conversionStatus === 'success'}
+      />
+
     </div>
   );
 }

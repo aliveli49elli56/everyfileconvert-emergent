@@ -87,16 +87,6 @@ export default function HomeClient({ dict, locale }: { dict: DictType; locale: L
         </div>
       </section>
 
-      {/*
-        ── AD SLOT: drag_menu_under ──────────────────────────────────────────
-        Desktop: 336×280 centered between the Dropzone and All-In-One Tools.
-        Mobile : Same slot, max-width 336px, wrapped in z-0 + my-8 safety margin.
-        <!-- REKLAM KODU BURAYA GELECEK -->
-      */}
-      <div className="relative z-0 flex justify-center my-8 py-1" data-testid="ad-drag-menu-under">
-        <AdSlot adUnit="drag_menu_under-336x280" width={336} height={280} />
-      </div>
-
       {/* ── All-In-One Tools Section ── */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">

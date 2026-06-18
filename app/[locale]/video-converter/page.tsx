@@ -19,7 +19,6 @@ import {
   Rewind,
 } from "lucide-react";
 import UniversalDropzone from "@/components/UniversalDropzone";
-import AdSlot from "@/components/ads/ad-slot";
 import { getDictionary, getHreflangLinks } from "@/lib/i18n/config";
 import type { Locale } from "@/lib/i18n/config";
 
@@ -115,15 +114,6 @@ export default async function LocaleVideoConverterPage({ params }: PageProps) {
           </div>
         </div>
       </section>
-
-      {/*
-        AD: drag_menu_under — Dropzone ile Popular Conversions arasında
-        Masaüstü: 336×280 ortalanmış · Mobil: maks 336px, relative z-0, my-8
-        <!-- REKLAM KODU BURAYA GELECEK -->
-      */}
-      <div className="relative z-0 flex justify-center my-8 py-1" data-testid="ad-drag-menu-under">
-        <AdSlot adUnit="drag_menu_under-336x280" width={336} height={280} />
-      </div>
 
       <section className="py-12 bg-white border-y border-slate-100">
         <div className="container mx-auto px-4">
