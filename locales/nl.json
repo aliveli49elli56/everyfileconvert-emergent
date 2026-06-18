@@ -1,21 +1,63 @@
 {
   "converters": {
-    "titles": ["Converter", "Conversieprogramma", "Bestandsconverter", "Converteren"],
-    "features": ["Gratis, Online en Onbeperkt", "Online gratis converteren", "Online en Gratis", "Snelle online conversie"]
+    "titles": [
+      "Converter",
+      "Conversieprogramma",
+      "Bestandsconverter",
+      "Converteren"
+    ],
+    "features": [
+      "Gratis, Online en Onbeperkt",
+      "Online gratis converteren",
+      "Online en Gratis",
+      "Snelle online conversie"
+    ]
   },
   "image_resizer": {
-    "titles": ["Afbeelding formaat wijzigen", "Afbeeldingsgrootte verkleinen", "Fotoresolutie wijzigen", "Online afbeelding formaat wijzigen"],
-    "features": ["Zonder kwaliteitsverlies", "Batch afbeeldingen formaat wijzigen", "Snel en Gratis", "Verliesloze formaat wijziging"]
+    "titles": [
+      "Afbeelding formaat wijzigen",
+      "Afbeeldingsgrootte verkleinen",
+      "Fotoresolutie wijzigen",
+      "Online afbeelding formaat wijzigen"
+    ],
+    "features": [
+      "Zonder kwaliteitsverlies",
+      "Batch afbeeldingen formaat wijzigen",
+      "Snel en Gratis",
+      "Verliesloze formaat wijziging"
+    ]
   },
   "image_crop": {
-    "titles": ["Afbeelding online bijsnijden", "Afbeelding bijsnijdtool", "Foto bijsnijder", "Online afbeelding cutter"],
-    "features": ["Eenvoudig bijsnijden in browser", "Gratis en Onbeperkt", "Geen upload vereist"]
+    "titles": [
+      "Afbeelding online bijsnijden",
+      "Afbeelding bijsnijdtool",
+      "Foto bijsnijder",
+      "Online afbeelding cutter"
+    ],
+    "features": [
+      "Eenvoudig bijsnijden in browser",
+      "Gratis en Onbeperkt",
+      "Geen upload vereist"
+    ]
   },
   "compress_audio": {
-    "titles": ["Audio comprimeren", "MP3 formaat verkleinen", "Audio bestandscompressor", "Audio online comprimeren"],
-    "features": ["Zonder kwaliteitsverlies", "Online audiogrootte verkleinen", "Gratis en Snel"]
+    "titles": [
+      "Audio comprimeren",
+      "MP3 formaat verkleinen",
+      "Audio bestandscompressor",
+      "Audio online comprimeren"
+    ],
+    "features": [
+      "Zonder kwaliteitsverlies",
+      "Online audiogrootte verkleinen",
+      "Gratis en Snel"
+    ]
   },
-  "global_privacy": ["Veilige verwerking in browser", "Geen server upload", "Privacygericht converteren"],
+  "global_privacy": [
+    "Veilige verwerking in browser",
+    "Geen server upload",
+    "Privacygericht converteren"
+  ],
   "nav": {
     "home": "Home",
     "video": "Video",
@@ -50,7 +92,9 @@
     "backgroundRemoverDesc": "Achtergronden uit afbeeldingen onmiddellijk verwijderen met AI",
     "ebookConverter": "E-book converter",
     "ebookConverterDesc": "EPUB, MOBI, AZW3 naar PDF, TXT, HTML en meer Online converteren",
-    "getStarted": "Aan de slag"
+    "getStarted": "Aan de slag",
+    "onlineViewer": "Online Viewer",
+    "onlineViewerDesc": "Open en bekijk 75+ bestandsformaten direct in uw browser. Geen installatie vereist."
   },
   "features": {
     "private": "100% Privé",

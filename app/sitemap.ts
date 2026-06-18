@@ -66,6 +66,15 @@ const CONVERSIONS: Record<string, string[]> = {
   mobi: ["epub", "pdf"],
 };
 
+const VIEWER_EXTS = [
+  "pdf","docx","doc","docm","rtf","odt","txt","html","htm","md","xml","json",
+  "xlsx","xls","ods","csv","tsv","pptx","ppt",
+  "jpg","jpeg","png","gif","webp","bmp","ico","tiff","avif","svg","heic",
+  "psd","mp4","webm","mov","avi","mkv","ogv",
+  "mp3","wav","ogg","flac","aac","m4a",
+  "zip","eml","js","ts","py","css","yaml","sql","dxf","epub",
+] as const;
+
 function generateAllUrls(): MetadataRoute.Sitemap {
   const now = new Date();
   const allSitemapEntries: MetadataRoute.Sitemap = [];
@@ -99,6 +108,24 @@ function generateAllUrls(): MetadataRoute.Sitemap {
         lastModified: now,
         changeFrequency: "monthly",
         priority: 0.7,
+      });
+    });
+
+    // Viewer Hub
+    allSitemapEntries.push({
+      url: `${BASE_URL}/${locale}/view`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    });
+
+    // Viewer format pages
+    VIEWER_EXTS.forEach((ext) => {
+      allSitemapEntries.push({
+        url: `${BASE_URL}/${locale}/view/${ext}`,
+        lastModified: now,
+        changeFrequency: "monthly",
+        priority: 0.65,
       });
     });
   });

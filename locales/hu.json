@@ -1,21 +1,63 @@
 {
   "converters": {
-    "titles": ["Konvertáló", "Konverziós eszköz", "Fájlkonvertáló", "Konvertálás"],
-    "features": ["Ingyenes, Online és Korlátlan", "Online konvertálás ingyen", "Online és Ingyenes", "Gyors online konvertálás"]
+    "titles": [
+      "Konvertáló",
+      "Konverziós eszköz",
+      "Fájlkonvertáló",
+      "Konvertálás"
+    ],
+    "features": [
+      "Ingyenes, Online és Korlátlan",
+      "Online konvertálás ingyen",
+      "Online és Ingyenes",
+      "Gyors online konvertálás"
+    ]
   },
   "image_resizer": {
-    "titles": ["Képméret-módosító", "Képméret-csökkentő", "Fotófelbontás-változtató", "Képméret módosítása online"],
-    "features": ["Minőségromlás nélkül", "Kötegelt képméret-módosítás", "Gyors és Ingyenes", "Veszteségmentes átméretezés"]
+    "titles": [
+      "Képméret-módosító",
+      "Képméret-csökkentő",
+      "Fotófelbontás-változtató",
+      "Képméret módosítása online"
+    ],
+    "features": [
+      "Minőségromlás nélkül",
+      "Kötegelt képméret-módosítás",
+      "Gyors és Ingyenes",
+      "Veszteségmentes átméretezés"
+    ]
   },
   "image_crop": {
-    "titles": ["Kép vágása online", "Képvágó eszköz", "Fotóvágó", "Online képvágó"],
-    "features": ["Egyszerű böngészős vágás", "Ingyenes és Korlátlan", "Nem szükséges feltöltés"]
+    "titles": [
+      "Kép vágása online",
+      "Képvágó eszköz",
+      "Fotóvágó",
+      "Online képvágó"
+    ],
+    "features": [
+      "Egyszerű böngészős vágás",
+      "Ingyenes és Korlátlan",
+      "Nem szükséges feltöltés"
+    ]
   },
   "compress_audio": {
-    "titles": ["Hangkompresszor", "MP3 méretcsökkentő", "Hangfájl-kompresszor", "Hang tömörítése online"],
-    "features": ["Minőségromlás nélkül", "Online hangméret-csökkentő", "Ingyenes és Gyors"]
+    "titles": [
+      "Hangkompresszor",
+      "MP3 méretcsökkentő",
+      "Hangfájl-kompresszor",
+      "Hang tömörítése online"
+    ],
+    "features": [
+      "Minőségromlás nélkül",
+      "Online hangméret-csökkentő",
+      "Ingyenes és Gyors"
+    ]
   },
-  "global_privacy": ["Biztonságos böngészős feldolgozás", "Nincs szerverféltöltés", "Adatvédelem-központú konvertálás"],
+  "global_privacy": [
+    "Biztonságos böngészős feldolgozás",
+    "Nincs szerverféltöltés",
+    "Adatvédelem-központú konvertálás"
+  ],
   "nav": {
     "home": "Főoldal",
     "video": "Videó",
@@ -50,7 +92,9 @@
     "backgroundRemoverDesc": "Képek hátterének eltávolítása azonnal AI segítségével",
     "ebookConverter": "E-könyvkonvertáló",
     "ebookConverterDesc": "EPUB, MOBI, AZW3 konvertálása PDF-be, TXT-be, HTML-be és tovább online",
-    "getStarted": "Kezdés"
+    "getStarted": "Kezdés",
+    "onlineViewer": "Online Megjelenítő",
+    "onlineViewerDesc": "Nyisson meg és tekintsen meg 75+ fájlformátumot közvetlenül a böngészőjében. Telepítés nélkül."
   },
   "features": {
     "private": "100% Privát",

@@ -1,47 +1,61 @@
-# EveryFileConvert — Vietnamese Locale Removal
+# EveryFileConvert — PRD
 
-## Original Problem Statement
-Remove the Vietnamese language ('vi') completely from the project without touching UI, colors, layout, or the programmatic SEO (pSEO) conversion matrices. Implement 301 redirects for all previously indexed /vi/* routes.
+## Problem Statement
+Client-side file conversion and viewing tool built with Next.js (App Router) and Tailwind CSS.
+Multi-language (17 locales), programmatic SEO, zero server-side processing.
 
-## Architecture / Tech Stack
-- Next.js (App Router) + Tailwind CSS
-- i18n via custom locale config (lib/i18n/config.ts + middleware.ts)
-- Programmatic SEO via CONVERSION_MATRIX in lib/config/master-registry.ts (untouched)
-- Static sitemap generation via app/sitemap.ts
+## Architecture
+- Next.js 13.5.1 App Router + Tailwind CSS
+- 17 active locales (en, tr, de, fr, es, it, pt, ja, zh, nl, pl, ko, sv, da, no, hu, fi) — vi removed
+- lib/config/master-registry.ts — conversion matrix (NEVER modify)
+- lib/config/viewer-registry.ts — viewer format registry
+- lib/engine/ — client-side conversion engines
+- public/pdf.worker.min.mjs — pdfjs worker
 
-## Core Requirements (Static)
-1. Delete locales/vi.json
-2. Remove "vi" from all locale arrays (config, middleware, sitemap, all page generateStaticParams)
-3. Remove vi/vi-VN from localeLanguageMap and VN from countryLocaleMap in middleware
-4. Add 301 permanent redirects: /vi → /en and /vi/:path* → /en/:path*
-5. Never touch master-registry.ts, Tailwind, globals.css, or UI components
+## What's Been Implemented
 
-## What's Been Implemented (2025-06-18)
+### 2025-06-18: Vietnamese Locale Removal
+- Deleted locales/vi.json
+- Removed "vi" from all locale arrays (config, middleware, sitemap, 9× page files)
+- Added 301 redirects /vi → /en, /vi/:path* → /en/:path*
+- master-registry.ts untouched
 
-### Files Modified
-| File | Change |
-|------|--------|
-| `locales/vi.json` | **Deleted** |
-| `lib/i18n/config.ts` | Removed "vi" from `locales` array; removed `vi: "Tiếng Việt"` from `localeNames` |
-| `middleware.ts` | Removed "vi" from `locales` array; removed `vi`/`vi-VN` from `localeLanguageMap`; removed `VN: "vi"` + comment from `countryLocaleMap` |
-| `app/sitemap.ts` | Removed "vi" from `LOCALES` array |
-| `next.config.js` | Added `async redirects()` with 301 permanent redirects for `/vi` → `/en` and `/vi/:path*` → `/en/:path*` |
-| `app/[locale]/[slug]/page.tsx` | Removed "vi" from inline `generateStaticParams` locales array |
-| `app/[locale]/image-crop/page.tsx` | Same |
-| `app/[locale]/pdf-tools/page.tsx` | Same |
-| `app/[locale]/audio-converter/page.tsx` | Same |
-| `app/[locale]/video-converter/page.tsx` | Same |
-| `app/[locale]/image-resizer/page.tsx` | Same |
-| `app/[locale]/background-remover/page.tsx` | Same |
-| `app/[locale]/image-converter/page.tsx` | Same |
-| `app/[locale]/compress-audio/page.tsx` | Same |
+### 2025-06-18: Conversion Bug Fixes
+- Fixed pdfjs-dist v4 GlobalWorkerOptions.workerSrc (empty → /pdf.worker.min.mjs)
+- Created EbookEngine.ts for EPUB/TXT/HTML→any client-side conversions
+- Fixed PDF→TXT/HTML/EPUB/DOCX output format (was always returning PDF)
+- Added EBOOK_EXTS domain + ebook:convert operation to Transcoder
 
-### Files Strictly Preserved
-- `lib/config/master-registry.ts` — untouched
-- All Tailwind config files — untouched
-- `globals.css` and all UI components — untouched
+### 2025-06-18: UI Updates
+- Gradient background full-screen width (xl:-mx-44)
+- Removed "100M+ files converted" badge
+- Content moved up (-mt-[122px] + pt-[122px])
+- Supported Formats → FormatSelector (dynamic dropdowns from master-registry)
+- FormatSelector auto-redirects to /[locale]/[from]-to-[to]
+
+### 2025-06-18: Online Viewer Ecosystem
+- viewer-registry.ts: 53+ formats with category/engine/description metadata
+- ViewerHub component: grouped format cards with category colors
+- FileViewer component: drop zone + file size guard + engine routing
+- Viewer engines: PDF (pdfjs), DOCX (mammoth), Sheet (SheetJS/xlsx), Text,
+  Image (native), Archive (JSZip), Email (EML), Media (video/audio HTML5),
+  EPUB, PPTX (ZIP XML parse), PSD (ag-psd)
+- Pages: /[locale]/view (hub) + /[locale]/view/[slug] (per-format)
+- Navbar: "Online Viewer" link added
+- HomeClient: "Online Viewer" card in All-In-One Tools grid
+- All 17 locale files: onlineViewer + onlineViewerDesc keys added
+- Sitemap: viewer URLs added to paginated pool
+- File size limits: 50MB desktop, 20MB mobile; smart redirect to converter
+
+## Packages Installed
+- xlsx (SheetJS)
+- docx-preview
+- ag-psd
 
 ## Prioritized Backlog
 - P0: ✅ Complete
-- P1: Verify build passes in deployment environment (next build)
-- P2: Monitor Google Search Console for successful 301 redirect crawl coverage
+- P1: Test all viewer engines with real files in production
+- P1: Add DWG viewer (requires WASM port)
+- P2: Add RAR/7z archive viewer
+- P2: PPTX visual rendering (currently text-only XML parse)
+- P2: PSD layer preview panel

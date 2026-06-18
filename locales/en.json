@@ -1,21 +1,63 @@
 {
   "converters": {
-    "titles": ["Converter", "Conversion Tool", "File Converter", "Convert"],
-    "features": ["Free, Online & Unlimited", "Convert Online for Free", "Online & Free", "Fast Online Conversion"]
+    "titles": [
+      "Converter",
+      "Conversion Tool",
+      "File Converter",
+      "Convert"
+    ],
+    "features": [
+      "Free, Online & Unlimited",
+      "Convert Online for Free",
+      "Online & Free",
+      "Fast Online Conversion"
+    ]
   },
   "image_resizer": {
-    "titles": ["Image Resizer", "Image Size Reducer", "Photo Resolution Changer", "Resize Images Online"],
-    "features": ["Without Quality Loss", "Bulk Image Resizing", "Fast & Free", "Lossless Resize"]
+    "titles": [
+      "Image Resizer",
+      "Image Size Reducer",
+      "Photo Resolution Changer",
+      "Resize Images Online"
+    ],
+    "features": [
+      "Without Quality Loss",
+      "Bulk Image Resizing",
+      "Fast & Free",
+      "Lossless Resize"
+    ]
   },
   "image_crop": {
-    "titles": ["Crop Image Online", "Image Cropping Tool", "Photo Cropper", "Online Image Cutter"],
-    "features": ["Easy Browser Cropping", "Free & Unlimited", "No Upload Required"]
+    "titles": [
+      "Crop Image Online",
+      "Image Cropping Tool",
+      "Photo Cropper",
+      "Online Image Cutter"
+    ],
+    "features": [
+      "Easy Browser Cropping",
+      "Free & Unlimited",
+      "No Upload Required"
+    ]
   },
   "compress_audio": {
-    "titles": ["Audio Compressor", "MP3 Size Reducer", "Audio File Compressor", "Compress Audio Online"],
-    "features": ["Without Quality Loss", "Online Audio Size Reducer", "Free & Fast"]
+    "titles": [
+      "Audio Compressor",
+      "MP3 Size Reducer",
+      "Audio File Compressor",
+      "Compress Audio Online"
+    ],
+    "features": [
+      "Without Quality Loss",
+      "Online Audio Size Reducer",
+      "Free & Fast"
+    ]
   },
-  "global_privacy": ["Secure In-Browser Processing", "No Server Upload", "Privacy-First Conversion"],
+  "global_privacy": [
+    "Secure In-Browser Processing",
+    "No Server Upload",
+    "Privacy-First Conversion"
+  ],
   "nav": {
     "home": "Home",
     "video": "Video",
@@ -50,7 +92,9 @@
     "backgroundRemoverDesc": "Remove backgrounds from images instantly with AI",
     "ebookConverter": "E-Book Converter",
     "ebookConverterDesc": "Convert EPUB, MOBI, AZW3 to PDF, TXT, HTML and more Online",
-    "getStarted": "Get Started"
+    "getStarted": "Get Started",
+    "onlineViewer": "Online Viewer",
+    "onlineViewerDesc": "Open and view 75+ file formats directly in your browser instantly. No installation required."
   },
   "features": {
     "private": "100% Private",

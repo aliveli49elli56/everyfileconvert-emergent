@@ -1,21 +1,63 @@
 {
   "converters": {
-    "titles": ["Konverter", "Konverteringsværktøj", "Filkonverter", "Konvertér"],
-    "features": ["Gratis, Online og Ubegrænset", "Konvertér online gratis", "Online og Gratis", "Hurtig onlinekonvertering"]
+    "titles": [
+      "Konverter",
+      "Konverteringsværktøj",
+      "Filkonverter",
+      "Konvertér"
+    ],
+    "features": [
+      "Gratis, Online og Ubegrænset",
+      "Konvertér online gratis",
+      "Online og Gratis",
+      "Hurtig onlinekonvertering"
+    ]
   },
   "image_resizer": {
-    "titles": ["Ændr billedstørrelse", "Billedstørrelsesreducer", "Skift fotoupplösning", "Ændr billedstørrelse online"],
-    "features": ["Uden kvalitetstab", "Batch-ændring af billedstørrelse", "Hurtigt og Gratis", "Tabsfri størrelsesændring"]
+    "titles": [
+      "Ændr billedstørrelse",
+      "Billedstørrelsesreducer",
+      "Skift fotoupplösning",
+      "Ændr billedstørrelse online"
+    ],
+    "features": [
+      "Uden kvalitetstab",
+      "Batch-ændring af billedstørrelse",
+      "Hurtigt og Gratis",
+      "Tabsfri størrelsesændring"
+    ]
   },
   "image_crop": {
-    "titles": ["Beskær billede online", "Billedbeskæringsværktøj", "Fotobeskærer", "Online billedbeskærer"],
-    "features": ["Nem browserbeskæring", "Gratis og Ubegrænset", "Ingen upload krævet"]
+    "titles": [
+      "Beskær billede online",
+      "Billedbeskæringsværktøj",
+      "Fotobeskærer",
+      "Online billedbeskærer"
+    ],
+    "features": [
+      "Nem browserbeskæring",
+      "Gratis og Ubegrænset",
+      "Ingen upload krævet"
+    ]
   },
   "compress_audio": {
-    "titles": ["Lydkompressor", "MP3-størrelsesreducer", "Lydfil-kompressor", "Komprimer lyd online"],
-    "features": ["Uden kvalitetstab", "Online lydstørrelsesreducer", "Gratis og Hurtigt"]
+    "titles": [
+      "Lydkompressor",
+      "MP3-størrelsesreducer",
+      "Lydfil-kompressor",
+      "Komprimer lyd online"
+    ],
+    "features": [
+      "Uden kvalitetstab",
+      "Online lydstørrelsesreducer",
+      "Gratis og Hurtigt"
+    ]
   },
-  "global_privacy": ["Sikker behandling i browser", "Ingen serverupload", "Fortrolighedsfokuseret konvertering"],
+  "global_privacy": [
+    "Sikker behandling i browser",
+    "Ingen serverupload",
+    "Fortrolighedsfokuseret konvertering"
+  ],
   "nav": {
     "home": "Hjem",
     "video": "Video",
@@ -50,7 +92,9 @@
     "backgroundRemoverDesc": "Fjern baggrunde fra billeder øjeblikkeligt med AI",
     "ebookConverter": "E-bogskonverter",
     "ebookConverterDesc": "Konvertér EPUB, MOBI, AZW3 til PDF, TXT, HTML og mere online",
-    "getStarted": "Kom i gang"
+    "getStarted": "Kom i gang",
+    "onlineViewer": "Online Fremviser",
+    "onlineViewerDesc": "Åbn og vis 75+ filformater direkte i din browser. Ingen installation kræves."
   },
   "features": {
     "private": "100% Privat",

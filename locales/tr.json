@@ -1,21 +1,63 @@
 {
   "converters": {
-    "titles": ["Dönüştürücü", "Dönüştürme Programı", "Çevirici", "Dönüştür"],
-    "features": ["Ücretsiz, Çevrimiçi ve Sınırsız", "Çevrimiçi Olarak Ücretsiz Dönüştürün", "Online ve Ücretsiz", "Hızlı Online Dönüşüm"]
+    "titles": [
+      "Dönüştürücü",
+      "Dönüştürme Programı",
+      "Çevirici",
+      "Dönüştür"
+    ],
+    "features": [
+      "Ücretsiz, Çevrimiçi ve Sınırsız",
+      "Çevrimiçi Olarak Ücretsiz Dönüştürün",
+      "Online ve Ücretsiz",
+      "Hızlı Online Dönüşüm"
+    ]
   },
   "image_resizer": {
-    "titles": ["Görsel Yeniden Boyutlandırma", "Resim Boyutu Küçültme", "Fotoğraf Çözünürlük Değiştirme", "Online Resim Boyutlandırıcı"],
-    "features": ["Kalite Kaybı Olmadan", "Toplu Resim Boyutlandırma", "Hızlı ve Ücretsiz", "Kayıpsız Boyutlandırma"]
+    "titles": [
+      "Görsel Yeniden Boyutlandırma",
+      "Resim Boyutu Küçültme",
+      "Fotoğraf Çözünürlük Değiştirme",
+      "Online Resim Boyutlandırıcı"
+    ],
+    "features": [
+      "Kalite Kaybı Olmadan",
+      "Toplu Resim Boyutlandırma",
+      "Hızlı ve Ücretsiz",
+      "Kayıpsız Boyutlandırma"
+    ]
   },
   "image_crop": {
-    "titles": ["Resim Kırpma Online", "Görsel Kesme Aracı", "Fotoğraf Kırpıcı", "Online Resim Kesici"],
-    "features": ["Tarayıcıda Kolay Kırpma", "Ücretsiz ve Sınırsız", "Yükleme Gerekmez"]
+    "titles": [
+      "Resim Kırpma Online",
+      "Görsel Kesme Aracı",
+      "Fotoğraf Kırpıcı",
+      "Online Resim Kesici"
+    ],
+    "features": [
+      "Tarayıcıda Kolay Kırpma",
+      "Ücretsiz ve Sınırsız",
+      "Yükleme Gerekmez"
+    ]
   },
   "compress_audio": {
-    "titles": ["Ses Sıkıştırma", "MP3 Boyutu Küçültme", "Ses Dosyası Sıkıştırıcı", "Çevrimiçi Ses Sıkıştır"],
-    "features": ["Kaliteden Ödün Vermeden", "Online Ses Boyutu Azaltma", "Ücretsiz ve Hızlı"]
+    "titles": [
+      "Ses Sıkıştırma",
+      "MP3 Boyutu Küçültme",
+      "Ses Dosyası Sıkıştırıcı",
+      "Çevrimiçi Ses Sıkıştır"
+    ],
+    "features": [
+      "Kaliteden Ödün Vermeden",
+      "Online Ses Boyutu Azaltma",
+      "Ücretsiz ve Hızlı"
+    ]
   },
-  "global_privacy": ["Tarayıcıda Güvenli İşlem", "Sunucuya Yükleme Yok", "Gizlilik Odaklı Dönüştürme"],
+  "global_privacy": [
+    "Tarayıcıda Güvenli İşlem",
+    "Sunucuya Yükleme Yok",
+    "Gizlilik Odaklı Dönüştürme"
+  ],
   "nav": {
     "home": "Ana Sayfa",
     "video": "Video",
@@ -50,7 +92,9 @@
     "backgroundRemoverDesc": "Yapay zeka ile görsellerden arka planları anında kaldırın",
     "ebookConverter": "e-Kitap Dönüştürücü",
     "ebookConverterDesc": "EPUB, MOBI, AZW3 dosyalarını PDF, TXT, HTML ve daha fazlasına Çevrimiçi Dönüştürün",
-    "getStarted": "Başla"
+    "getStarted": "Başla",
+    "onlineViewer": "Online Görüntüleyici",
+    "onlineViewerDesc": "75+ dosya formatını tarayıcınızda anında görüntüleyin. Kurulum gerekmez."
   },
   "features": {
     "private": "%100 Gizli",

@@ -1,21 +1,63 @@
 {
   "converters": {
-    "titles": ["Convertisseur", "Programme de conversion", "Convertisseur de fichiers", "Convertir"],
-    "features": ["Gratuit, En ligne et Illimité", "Convertir gratuitement en ligne", "En ligne et Gratuit", "Conversion en ligne rapide"]
+    "titles": [
+      "Convertisseur",
+      "Programme de conversion",
+      "Convertisseur de fichiers",
+      "Convertir"
+    ],
+    "features": [
+      "Gratuit, En ligne et Illimité",
+      "Convertir gratuitement en ligne",
+      "En ligne et Gratuit",
+      "Conversion en ligne rapide"
+    ]
   },
   "image_resizer": {
-    "titles": ["Redimensionner l'image", "Réducteur de taille d'image", "Modifier la résolution photo", "Redimensionnement d'image en ligne"],
-    "features": ["Sans perte de qualité", "Redimensionnement en lot", "Rapide et Gratuit", "Redimensionnement sans perte"]
+    "titles": [
+      "Redimensionner l'image",
+      "Réducteur de taille d'image",
+      "Modifier la résolution photo",
+      "Redimensionnement d'image en ligne"
+    ],
+    "features": [
+      "Sans perte de qualité",
+      "Redimensionnement en lot",
+      "Rapide et Gratuit",
+      "Redimensionnement sans perte"
+    ]
   },
   "image_crop": {
-    "titles": ["Rogner l'image en ligne", "Outil de rognage d'image", "Rognage de photo", "Outil de découpe en ligne"],
-    "features": ["Rognage facile dans le navigateur", "Gratuit et Illimité", "Aucun téléchargement requis"]
+    "titles": [
+      "Rogner l'image en ligne",
+      "Outil de rognage d'image",
+      "Rognage de photo",
+      "Outil de découpe en ligne"
+    ],
+    "features": [
+      "Rognage facile dans le navigateur",
+      "Gratuit et Illimité",
+      "Aucun téléchargement requis"
+    ]
   },
   "compress_audio": {
-    "titles": ["Compresser l'audio", "Réducteur de taille MP3", "Compresseur de fichier audio", "Compresser l'audio en ligne"],
-    "features": ["Sans perte de qualité", "Réduction de taille audio en ligne", "Gratuit et Rapide"]
+    "titles": [
+      "Compresser l'audio",
+      "Réducteur de taille MP3",
+      "Compresseur de fichier audio",
+      "Compresser l'audio en ligne"
+    ],
+    "features": [
+      "Sans perte de qualité",
+      "Réduction de taille audio en ligne",
+      "Gratuit et Rapide"
+    ]
   },
-  "global_privacy": ["Traitement sécurisé dans le navigateur", "Aucun téléchargement sur serveur", "Conversion respectueuse de la vie privée"],
+  "global_privacy": [
+    "Traitement sécurisé dans le navigateur",
+    "Aucun téléchargement sur serveur",
+    "Conversion respectueuse de la vie privée"
+  ],
   "nav": {
     "home": "Accueil",
     "video": "Vidéo",
@@ -50,7 +92,9 @@
     "backgroundRemoverDesc": "Supprimer les arrière-plans des images instantanément avec l'IA",
     "ebookConverter": "Convertisseur d'e-books",
     "ebookConverterDesc": "Convertir EPUB, MOBI, AZW3 en PDF, TXT, HTML et plus En ligne",
-    "getStarted": "Commencer"
+    "getStarted": "Commencer",
+    "onlineViewer": "Visionneuse en Ligne",
+    "onlineViewerDesc": "Ouvrez et consultez 75+ formats de fichiers directement dans votre navigateur. Aucune installation requise."
   },
   "features": {
     "private": "100% Privé",

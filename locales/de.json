@@ -1,21 +1,63 @@
 {
   "converters": {
-    "titles": ["Konverter", "Konvertierungsprogramm", "Dateikonverter", "Konvertieren"],
-    "features": ["Kostenlos, Online & Unbegrenzt", "Online kostenlos konvertieren", "Online & Kostenlos", "Schnelle Online-Konvertierung"]
+    "titles": [
+      "Konverter",
+      "Konvertierungsprogramm",
+      "Dateikonverter",
+      "Konvertieren"
+    ],
+    "features": [
+      "Kostenlos, Online & Unbegrenzt",
+      "Online kostenlos konvertieren",
+      "Online & Kostenlos",
+      "Schnelle Online-Konvertierung"
+    ]
   },
   "image_resizer": {
-    "titles": ["Bildgröße ändern", "Bildgrößenreduzierer", "Fotoauflösung ändern", "Bilder online skalieren"],
-    "features": ["Ohne Qualitätsverlust", "Bilder stapelweise skalieren", "Schnell & Kostenlos", "Verlustfreies Skalieren"]
+    "titles": [
+      "Bildgröße ändern",
+      "Bildgrößenreduzierer",
+      "Fotoauflösung ändern",
+      "Bilder online skalieren"
+    ],
+    "features": [
+      "Ohne Qualitätsverlust",
+      "Bilder stapelweise skalieren",
+      "Schnell & Kostenlos",
+      "Verlustfreies Skalieren"
+    ]
   },
   "image_crop": {
-    "titles": ["Bild online zuschneiden", "Bildausschnitt-Tool", "Foto-Zuschneider", "Online-Bildschneider"],
-    "features": ["Einfaches Browser-Zuschneiden", "Kostenlos & Unbegrenzt", "Kein Upload erforderlich"]
+    "titles": [
+      "Bild online zuschneiden",
+      "Bildausschnitt-Tool",
+      "Foto-Zuschneider",
+      "Online-Bildschneider"
+    ],
+    "features": [
+      "Einfaches Browser-Zuschneiden",
+      "Kostenlos & Unbegrenzt",
+      "Kein Upload erforderlich"
+    ]
   },
   "compress_audio": {
-    "titles": ["Audio komprimieren", "MP3-Größe reduzieren", "Audio-Datei-Kompressor", "Audio online komprimieren"],
-    "features": ["Ohne Qualitätsverlust", "Online Audio-Größe reduzieren", "Kostenlos & Schnell"]
+    "titles": [
+      "Audio komprimieren",
+      "MP3-Größe reduzieren",
+      "Audio-Datei-Kompressor",
+      "Audio online komprimieren"
+    ],
+    "features": [
+      "Ohne Qualitätsverlust",
+      "Online Audio-Größe reduzieren",
+      "Kostenlos & Schnell"
+    ]
   },
-  "global_privacy": ["Sichere Verarbeitung im Browser", "Kein Server-Upload", "Datenschutzorientierte Konvertierung"],
+  "global_privacy": [
+    "Sichere Verarbeitung im Browser",
+    "Kein Server-Upload",
+    "Datenschutzorientierte Konvertierung"
+  ],
   "nav": {
     "home": "Startseite",
     "video": "Video",
@@ -50,7 +92,9 @@
     "backgroundRemoverDesc": "Hintergründe aus Bildern mit KI sofort entfernen",
     "ebookConverter": "E-Book-Konverter",
     "ebookConverterDesc": "EPUB, MOBI, AZW3 zu PDF, TXT, HTML und mehr Online konvertieren",
-    "getStarted": "Loslegen"
+    "getStarted": "Loslegen",
+    "onlineViewer": "Online-Viewer",
+    "onlineViewerDesc": "Öffnen und betrachten Sie 75+ Dateiformate direkt im Browser. Keine Installation erforderlich."
   },
   "features": {
     "private": "100% Privat",

@@ -1,21 +1,63 @@
 {
   "converters": {
-    "titles": ["Muunnin", "Muunnostyökalu", "Tiedostomuunnin", "Muunna"],
-    "features": ["Ilmainen, Verkossa ja Rajoittamaton", "Muunna verkossa ilmaiseksi", "Verkossa ja Ilmainen", "Nopea verkkomuunnos"]
+    "titles": [
+      "Muunnin",
+      "Muunnostyökalu",
+      "Tiedostomuunnin",
+      "Muunna"
+    ],
+    "features": [
+      "Ilmainen, Verkossa ja Rajoittamaton",
+      "Muunna verkossa ilmaiseksi",
+      "Verkossa ja Ilmainen",
+      "Nopea verkkomuunnos"
+    ]
   },
   "image_resizer": {
-    "titles": ["Kuvan koon muuttaja", "Kuvan koon pienentäjä", "Valokuvan resoluution muuttaja", "Muuta kuvan kokoa verkossa"],
-    "features": ["Ilman laadun heikkenemistä", "Eräkuvan koon muuttaminen", "Nopeasti ja Ilmaiseksi", "Häviötön koon muuttaminen"]
+    "titles": [
+      "Kuvan koon muuttaja",
+      "Kuvan koon pienentäjä",
+      "Valokuvan resoluution muuttaja",
+      "Muuta kuvan kokoa verkossa"
+    ],
+    "features": [
+      "Ilman laadun heikkenemistä",
+      "Eräkuvan koon muuttaminen",
+      "Nopeasti ja Ilmaiseksi",
+      "Häviötön koon muuttaminen"
+    ]
   },
   "image_crop": {
-    "titles": ["Rajaa kuva verkossa", "Kuvanrajaustyökalu", "Valokuvan rajaaja", "Verkossa kuvanrajaaja"],
-    "features": ["Helppo selainrajaus", "Ilmainen ja Rajoittamaton", "Ei latausta tarvita"]
+    "titles": [
+      "Rajaa kuva verkossa",
+      "Kuvanrajaustyökalu",
+      "Valokuvan rajaaja",
+      "Verkossa kuvanrajaaja"
+    ],
+    "features": [
+      "Helppo selainrajaus",
+      "Ilmainen ja Rajoittamaton",
+      "Ei latausta tarvita"
+    ]
   },
   "compress_audio": {
-    "titles": ["Äänikompressori", "MP3-koon pienentäjä", "Äänitiedostokompressori", "Pakkaa ääni verkossa"],
-    "features": ["Ilman laadun heikkenemistä", "Verkossa äänenkoon pienentäjä", "Ilmainen ja Nopea"]
+    "titles": [
+      "Äänikompressori",
+      "MP3-koon pienentäjä",
+      "Äänitiedostokompressori",
+      "Pakkaa ääni verkossa"
+    ],
+    "features": [
+      "Ilman laadun heikkenemistä",
+      "Verkossa äänenkoon pienentäjä",
+      "Ilmainen ja Nopea"
+    ]
   },
-  "global_privacy": ["Turvallinen selainprosessointi", "Ei palvelinlatausta", "Yksityisyyteen keskittyvä muunnos"],
+  "global_privacy": [
+    "Turvallinen selainprosessointi",
+    "Ei palvelinlatausta",
+    "Yksityisyyteen keskittyvä muunnos"
+  ],
   "nav": {
     "home": "Koti",
     "video": "Video",
@@ -50,7 +92,9 @@
     "backgroundRemoverDesc": "Poista kuvien tausta välittömästi tekoälyn avulla",
     "ebookConverter": "E-kirjamuunnin",
     "ebookConverterDesc": "Muunna EPUB, MOBI, AZW3 PDF:ksi, TXT:ksi, HTML:ksi ja lisää verkossa",
-    "getStarted": "Aloita"
+    "getStarted": "Aloita",
+    "onlineViewer": "Online-katseluohjelma",
+    "onlineViewerDesc": "Avaa ja katso 75+ tiedostomuotoa suoraan selaimessasi. Ei asennusta."
   },
   "features": {
     "private": "100% Yksityinen",

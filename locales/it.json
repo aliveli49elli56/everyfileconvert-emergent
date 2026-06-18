@@ -1,21 +1,63 @@
 {
   "converters": {
-    "titles": ["Convertitore", "Programma di conversione", "Convertitore file", "Converti"],
-    "features": ["Gratuito, Online e Illimitato", "Converti online gratuitamente", "Online e Gratuito", "Conversione online rapida"]
+    "titles": [
+      "Convertitore",
+      "Programma di conversione",
+      "Convertitore file",
+      "Converti"
+    ],
+    "features": [
+      "Gratuito, Online e Illimitato",
+      "Converti online gratuitamente",
+      "Online e Gratuito",
+      "Conversione online rapida"
+    ]
   },
   "image_resizer": {
-    "titles": ["Ridimensiona immagine", "Riduttore dimensioni immagine", "Cambia risoluzione foto", "Ridimensionatore immagini online"],
-    "features": ["Senza perdita di qualità", "Ridimensionamento in batch", "Veloce e Gratuito", "Ridimensionamento senza perdite"]
+    "titles": [
+      "Ridimensiona immagine",
+      "Riduttore dimensioni immagine",
+      "Cambia risoluzione foto",
+      "Ridimensionatore immagini online"
+    ],
+    "features": [
+      "Senza perdita di qualità",
+      "Ridimensionamento in batch",
+      "Veloce e Gratuito",
+      "Ridimensionamento senza perdite"
+    ]
   },
   "image_crop": {
-    "titles": ["Ritaglia immagine online", "Strumento di ritaglio immagine", "Ritaglio foto", "Taglierina immagini online"],
-    "features": ["Ritaglio facile nel browser", "Gratuito e Illimitato", "Nessun upload richiesto"]
+    "titles": [
+      "Ritaglia immagine online",
+      "Strumento di ritaglio immagine",
+      "Ritaglio foto",
+      "Taglierina immagini online"
+    ],
+    "features": [
+      "Ritaglio facile nel browser",
+      "Gratuito e Illimitato",
+      "Nessun upload richiesto"
+    ]
   },
   "compress_audio": {
-    "titles": ["Comprimi audio", "Riduttore dimensioni MP3", "Compressore file audio", "Comprimi audio online"],
-    "features": ["Senza perdita di qualità", "Riduzione dimensioni audio online", "Gratuito e Veloce"]
+    "titles": [
+      "Comprimi audio",
+      "Riduttore dimensioni MP3",
+      "Compressore file audio",
+      "Comprimi audio online"
+    ],
+    "features": [
+      "Senza perdita di qualità",
+      "Riduzione dimensioni audio online",
+      "Gratuito e Veloce"
+    ]
   },
-  "global_privacy": ["Elaborazione sicura nel browser", "Nessun upload al server", "Conversione orientata alla privacy"],
+  "global_privacy": [
+    "Elaborazione sicura nel browser",
+    "Nessun upload al server",
+    "Conversione orientata alla privacy"
+  ],
   "nav": {
     "home": "Home",
     "video": "Video",
@@ -50,7 +92,9 @@
     "backgroundRemoverDesc": "Rimuovi sfondi dalle immagini istantaneamente con l'IA",
     "ebookConverter": "Convertitore e-book",
     "ebookConverterDesc": "Converti EPUB, MOBI, AZW3 in PDF, TXT, HTML e altro Online",
-    "getStarted": "Inizia"
+    "getStarted": "Inizia",
+    "onlineViewer": "Visualizzatore Online",
+    "onlineViewerDesc": "Apri e visualizza 75+ formati di file direttamente nel tuo browser. Nessuna installazione richiesta."
   },
   "features": {
     "private": "100% Privato",

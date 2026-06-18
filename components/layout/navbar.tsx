@@ -15,6 +15,7 @@ import {
   Globe,
   ChevronDown,
   X,
+  Eye,
 } from "lucide-react";
 import { locales, localeNames } from "@/lib/i18n/config";
 import type { Locale } from "@/lib/i18n/config";
@@ -71,6 +72,13 @@ function getNavLinks(locale: string): NavLink[] {
       icon: BookOpen,
       iconColor: "text-amber-400",
       iconBg: "group-hover:bg-amber-500/10",
+    },
+    {
+      href: `/${locale}/view`,
+      label: "Online Viewer",
+      icon: Eye,
+      iconColor: "text-cyan-400",
+      iconBg: "group-hover:bg-cyan-500/10",
     },
   ];
 }
@@ -193,7 +201,9 @@ export default function Navbar({ locale }: { locale: Locale }) {
                           ? "rgb(52,211,153,0.5)"
                           : link.iconColor === "text-red-400"
                           ? "rgb(248,113,113,0.5)"
-                          : "rgb(251,191,36,0.5)"
+                          : link.iconColor === "text-amber-400"
+                          ? "rgb(251,191,36,0.5)"
+                          : "rgb(34,211,238,0.5)"
                       }`,
                     }}
                   />

@@ -15,6 +15,7 @@ import {
   Music,
   FileType,
   FileImage,
+  Eye,
 } from "lucide-react";
 import UniversalDropzone from "@/components/UniversalDropzone";
 import FormatSelector from "@/components/FormatSelector";
@@ -43,6 +44,7 @@ export default function HomeClient({ dict, locale }: { dict: DictType; locale: L
     { nameKey: "pdfTools", descKey: "pdfToolsDesc", icon: FileType, href: `/${locale}/pdf-tools`, color: "from-amber-500 to-orange-500", bgColor: "bg-amber-50", features: ["Merge PDFs", "Split pages", "Compress files"] },
     { nameKey: "backgroundRemover", descKey: "backgroundRemoverDesc", icon: Eraser, href: `/${locale}/background-remover`, color: "from-indigo-500 to-slate-500", bgColor: "bg-indigo-50", features: ["AI-powered", "Transparent PNG", "Batch mode"] },
     { nameKey: "ebookConverter", descKey: "ebookConverterDesc", icon: BookOpen, href: `/${locale}/ebook-converter`, color: "from-amber-500 to-orange-500", bgColor: "bg-amber-50", features: ["EPUB", "MOBI", "AZW3"] },
+    { nameKey: "onlineViewer", descKey: "onlineViewerDesc", icon: Eye, href: `/${locale}/view`, color: "from-cyan-500 to-sky-500", bgColor: "bg-cyan-50", features: ["75+ formats", "No install", "Instant view"] },
   ];
 
   const features = [
