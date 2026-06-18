@@ -145,7 +145,8 @@ function PersistentAdSlot({ slotName, isVisible }: { slotName: string; isVisible
       style={{ minHeight: '250px' }}
       data-testid={`persistent-ad-${slotName}`}
     >
-      <div className="w-full h-[250px] bg-gray-100 flex flex-col items-center justify-center border border-gray-200 rounded-xl gap-1">
+      {/* Responsive: max 336px ortalanmış, AdSense 300x250 / 336x280 uyumlu */}
+      <div className="mx-auto w-full max-w-[336px] h-[250px] bg-gray-100 flex flex-col items-center justify-center border border-gray-200 rounded-xl gap-1">
         <span className="text-[10px] text-gray-400 tracking-widest uppercase font-medium">
           Advertisement
         </span>

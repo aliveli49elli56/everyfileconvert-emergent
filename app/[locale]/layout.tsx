@@ -88,15 +88,15 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           Sidebars are hidden on mobile/tablet (hidden lg:block).
           Leaderboard ad is INTENTIONALLY REMOVED per placement policy.
         */}
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-[160px_minmax(0,1fr)_160px] items-start">
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-[160px_minmax(0,1fr)_160px]">
 
           {/* ── Left Sidebar — 160×600 Sticky Banner ── */}
           <aside
-            className="hidden lg:flex flex-col items-center pt-8"
+            className="hidden lg:block pt-8"
             aria-label="Left sidebar advertisement"
           >
             {/* <!-- REKLAM KODU BURAYA GELECEK --> */}
-            <div className="sticky top-20">
+            <div className="sticky top-20 flex justify-center">
               <AdSlot
                 adUnit="left-sidebar-160x600"
                 width={160}
@@ -112,11 +112,11 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 
           {/* ── Right Sidebar — 160×600 Sticky Banner ── */}
           <aside
-            className="hidden lg:flex flex-col items-center pt-8"
+            className="hidden lg:block pt-8"
             aria-label="Right sidebar advertisement"
           >
             {/* <!-- REKLAM KODU BURAYA GELECEK --> */}
-            <div className="sticky top-20">
+            <div className="sticky top-20 flex justify-center">
               <AdSlot
                 adUnit="right-sidebar-160x600"
                 width={160}
