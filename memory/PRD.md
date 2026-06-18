@@ -124,7 +124,13 @@ Multi-language (17 locales), programmatic SEO, zero server-side processing.
 - DXF CAD Viewer with SVG rendering, zoom controls, dark canvas ✅
 - RAR Archive Viewer with node-unrar-js WASM ✅
 
-### Phase 4: Mobile-Only Infeed Banners (2026-06-18)
+### 2026-06-18: Video/Audio Dönüşüm Hatası Düzeltildi
+- **Root Cause**: COEP `require-corp` başlığı tarayıcıda `unpkg.com` CDN fetch'ini engelliyordu; worker hata string döndürüyor, Transcoder Error nesne kontrol ediyor → "Transcoding failed" fallback
+- **Fix 1**: `@ffmpeg/core@0.12.6` install + `ffmpeg-core.js` & `ffmpeg-core.wasm` → `/public/ffmpeg/` (same-origin, COEP bypass)
+- **Fix 2**: `VideoAudioEngine.ts` CDN URL → `getFFmpegCoreBase()` local paths
+- **Fix 3**: `Transcoder.ts` catch block string errors da handle eder
+
+
 - **Category pages** (video, audio, image, pdf-tools): Mobile-only (`md:hidden`) 336×280 infeed banner eklendi, "All X Tools" başlığı altındaki açıklama cümlesinin hemen altına
   - data-testid: `ad-video-tools-mobile`, `ad-audio-tools-mobile`, `ad-image-tools-mobile`, `ad-pdf-tools-mobile`
   - AdSlot adUnit: `video/audio/image/pdf_tools_mobile-336x280`

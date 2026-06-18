@@ -10,8 +10,11 @@
 import type { TranscodeJob, TranscodeResult } from './Transcoder';
 import { buildOutputName } from './Transcoder';
 
-// FFmpeg.wasm core CDN (v0.12.x API)
-const FFMPEG_CORE_BASE = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm';
+// FFmpeg.wasm core — served locally from /public/ffmpeg/ to avoid CDN/COEP failures
+function getFFmpegCoreBase(): string {
+  if (typeof window !== 'undefined') return `${window.location.origin}/ffmpeg`;
+  return '/ffmpeg';
+}
 
 type FFmpegInstance = {
   load: (opts: { coreURL: string; wasmURL: string }) => Promise<boolean | void>;
@@ -171,8 +174,8 @@ async function getFFmpeg(onProgress?: (n: number) => void): Promise<FFmpegInstan
       if (process.env.NODE_ENV === 'development') console.debug('[FFmpeg]', msg);
     });
 
-    const coreURL = await toBlobURL(`${FFMPEG_CORE_BASE}/ffmpeg-core.js`, 'text/javascript');
-    const wasmURL = await toBlobURL(`${FFMPEG_CORE_BASE}/ffmpeg-core.wasm`, 'application/wasm');
+    const coreURL = await toBlobURL(`${getFFmpegCoreBase()}/ffmpeg-core.js`, 'text/javascript');
+    const wasmURL = await toBlobURL(`${getFFmpegCoreBase()}/ffmpeg-core.wasm`, 'application/wasm');
     onProgress?.(20);
 
     await ff.load({ coreURL, wasmURL });

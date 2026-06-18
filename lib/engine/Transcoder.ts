@@ -172,7 +172,9 @@ class TranscoderEngine {
           throw new Error(`Unknown domain: ${domain}`);
       }
     } catch (err) {
-      const msg = err instanceof Error ? err.message : 'Transcoding failed';
+      const msg = err instanceof Error
+        ? err.message
+        : (typeof err === 'string' ? err : 'Transcoding failed');
       throw new Error(`Dosya işlenemedi: ${msg}. Lütfen başka bir format deneyin.`);
     }
   }
