@@ -2,22 +2,32 @@
  * lib/engine/VideoAudioEngine.ts
  * ─────────────────────────────────────────────────────────────────────────────
  * FFmpeg.wasm engine for video and audio operations.
- * Core is loaded lazily from CDN on first use (cached by browser).
- * COOP/COEP headers in next.config.js enable SharedArrayBuffer → multi-thread.
+ * Multi-threaded (MT) core is used when SharedArrayBuffer is available.
+ * COOP/COEP headers in next.config.js enable SharedArrayBuffer.
+ * Falls back to single-threaded (ST) if SAB is unavailable.
+ * Core files served locally from /public/ffmpeg[-mt]/ to avoid CDN/COEP issues.
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
 import type { TranscodeJob, TranscodeResult } from './Transcoder';
 import { buildOutputName } from './Transcoder';
 
-// FFmpeg.wasm core — served locally from /public/ffmpeg/ to avoid CDN/COEP failures
-function getFFmpegCoreBase(): string {
-  if (typeof window !== 'undefined') return `${window.location.origin}/ffmpeg`;
-  return '/ffmpeg';
+// Detect SharedArrayBuffer availability → choose MT or ST core
+function hasSAB(): boolean {
+  return typeof SharedArrayBuffer !== 'undefined';
+}
+
+function getCoreFolder(): string {
+  return hasSAB() ? 'ffmpeg-mt' : 'ffmpeg';
+}
+
+function getCoreBase(): string {
+  const origin = typeof window !== 'undefined' ? window.location.origin : '';
+  return `${origin}/${getCoreFolder()}`;
 }
 
 type FFmpegInstance = {
-  load: (opts: { coreURL: string; wasmURL: string }) => Promise<boolean | void>;
+  load: (opts: { coreURL: string; wasmURL: string; workerURL?: string }) => Promise<boolean | void>;
   on: (event: string, cb: (data: unknown) => void) => void;
   exec: (args: string[]) => Promise<number>;
   writeFile: (name: string, data: Uint8Array) => Promise<void>;
@@ -64,8 +74,16 @@ function buildArgs(
   const o = opts ?? {};
 
   switch (op) {
-    case 'video:convert':
-      return ['-i', inputName, '-crf', '23', '-preset', 'fast', outputName];
+    case 'video:convert': {
+      // WebM requires VP9/VP8, not H.264
+      if (tgtExt === 'webm') {
+        return ['-i', inputName, '-c:v', 'libvpx-vp9', '-crf', '30', '-b:v', '0',
+                '-c:a', 'libopus', '-threads', '0', outputName];
+      }
+      // Standard H.264 for MP4, MKV, MOV, AVI, etc.
+      return ['-i', inputName, '-c:v', 'libx264', '-crf', '23', '-preset', 'veryfast',
+              '-c:a', 'aac', '-threads', '0', outputName];
+    }
 
     case 'video:trim': {
       const args = ['-i', inputName];
@@ -77,7 +95,12 @@ function buildArgs(
 
     case 'video:compress': {
       const crf = o.quality != null ? Math.round(51 - (o.quality / 100) * 33) : 28;
-      return ['-i', inputName, '-crf', String(crf), '-preset', 'fast', outputName];
+      if (tgtExt === 'webm') {
+        return ['-i', inputName, '-c:v', 'libvpx-vp9', '-crf', String(crf), '-b:v', '0',
+                '-threads', '0', outputName];
+      }
+      return ['-i', inputName, '-c:v', 'libx264', '-crf', String(crf), '-preset', 'veryfast',
+              '-c:a', 'aac', '-threads', '0', outputName];
     }
 
     case 'video:extract-audio':
@@ -174,13 +197,28 @@ async function getFFmpeg(onProgress?: (n: number) => void): Promise<FFmpegInstan
       if (process.env.NODE_ENV === 'development') console.debug('[FFmpeg]', msg);
     });
 
-    const coreURL = await toBlobURL(`${getFFmpegCoreBase()}/ffmpeg-core.js`, 'text/javascript');
-    const wasmURL = await toBlobURL(`${getFFmpegCoreBase()}/ffmpeg-core.wasm`, 'application/wasm');
-    onProgress?.(20);
+    const base = getCoreBase();
+    const useMT = hasSAB();
 
-    await ff.load({ coreURL, wasmURL });
+    onProgress?.(12);
+    // Fetch all core files in parallel for faster initialization
+    const [coreURL, wasmURL, workerURL] = await Promise.all([
+      toBlobURL(`${base}/ffmpeg-core.js`, 'text/javascript'),
+      toBlobURL(`${base}/ffmpeg-core.wasm`, 'application/wasm'),
+      useMT
+        ? toBlobURL(`${base}/ffmpeg-core.worker.js`, 'text/javascript')
+        : Promise.resolve(undefined),
+    ]);
+    onProgress?.(22);
+
+    const loadOpts = useMT
+      ? { coreURL, wasmURL, workerURL: workerURL! }
+      : { coreURL, wasmURL };
+
+    await ff.load(loadOpts);
     _ffmpegInstance = ff;
-    onProgress?.(30);
+    onProgress?.(32);
+    console.info(`[FFmpeg] Loaded ${useMT ? 'multi-threaded' : 'single-threaded'} core`);
   })();
 
   await _loadPromise;
