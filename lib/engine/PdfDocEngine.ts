@@ -213,8 +213,8 @@ async function pdfToWord(
 
   // Step 1: Load PDF with pdfjs-dist for proper text extraction
   const { getDocument, GlobalWorkerOptions } = await import('pdfjs-dist');
-  // Disable worker for browser bundle (no worker file needed)
-  GlobalWorkerOptions.workerSrc = '';
+  // Point to the worker file served from Next.js public/ directory
+  GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
   onProgress?.(20);
 
   const arrayBuffer = await file.arrayBuffer();

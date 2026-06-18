@@ -23,7 +23,9 @@ export type TranscodeOp =
   | 'pdf:merge' | 'pdf:split' | 'pdf:compress' | 'pdf:protect' | 'pdf:unlock'
   | 'pdf:rotate' | 'pdf:to-word' | 'pdf:watermark' | 'pdf:page-numbers'
   // Doc
-  | 'doc:to-pdf' | 'doc:to-text';
+  | 'doc:to-pdf' | 'doc:to-text'
+  // Ebook
+  | 'ebook:convert';
 
 // ── Options ────────────────────────────────────────────────────────────────────
 export interface TranscodeOptions {
@@ -104,14 +106,16 @@ const VIDEO_EXTS = new Set(['mp4','webm','avi','mov','mkv','wmv','flv','mpeg','m
 const AUDIO_EXTS = new Set(['mp3','wav','ogg','flac','aac','m4a','wma','aiff','opus','ac3','amr','ra','caf']);
 const PDF_EXTS   = new Set(['pdf']);
 const DOC_EXTS   = new Set(['doc','docx','rtf','odt','txt','html','md']);
+const EBOOK_EXTS = new Set(['epub','mobi','azw3','azw','fb2']);
 
-export function detectDomain(ext: string): 'image' | 'video' | 'audio' | 'pdf' | 'doc' | null {
+export function detectDomain(ext: string): 'image' | 'video' | 'audio' | 'pdf' | 'doc' | 'ebook' | null {
   const e = ext.toLowerCase();
   if (IMAGE_EXTS.has(e)) return 'image';
   if (VIDEO_EXTS.has(e)) return 'video';
   if (AUDIO_EXTS.has(e)) return 'audio';
   if (PDF_EXTS.has(e))   return 'pdf';
   if (DOC_EXTS.has(e))   return 'doc';
+  if (EBOOK_EXTS.has(e)) return 'ebook';
   return null;
 }
 
@@ -127,7 +131,10 @@ export function inferOp(sourceExt: string, targetExt: string): TranscodeOp {
   if (srcDomain === 'audio') return 'audio:convert';
   if (srcDomain === 'doc' && tgt === 'pdf') return 'doc:to-pdf';
   if (srcDomain === 'pdf' && tgtDomain === 'doc') return 'pdf:to-word';
+  if (srcDomain === 'pdf' && tgtDomain === 'ebook') return 'ebook:convert';
   if (srcDomain === 'pdf') return 'pdf:compress';
+  if (srcDomain === 'doc') return 'ebook:convert';       // doc → ebook
+  if (srcDomain === 'ebook') return 'ebook:convert';     // ebook → any
   return 'image:convert'; // fallback
 }
 
@@ -154,6 +161,10 @@ class TranscoderEngine {
         case 'doc': {
           const { PdfDocEngine } = await import('./PdfDocEngine');
           return await PdfDocEngine.process(job);
+        }
+        case 'ebook': {
+          const { EbookEngine } = await import('./EbookEngine');
+          return await EbookEngine.process(job);
         }
         default:
           throw new Error(`Unknown domain: ${domain}`);
