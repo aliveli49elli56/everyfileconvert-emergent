@@ -20,6 +20,7 @@ const MediaViewer = dynamic(() => import("./viewers/MediaViewer"), { loading: Sp
 const EbookViewer = dynamic(() => import("./viewers/EbookViewer"), { loading: Spinner });
 const PptxViewer  = dynamic(() => import("./viewers/PptxViewer"), { loading: Spinner });
 const PsdViewer   = dynamic(() => import("./viewers/PsdViewer"),  { loading: Spinner });
+const CadViewer   = dynamic(() => import("./viewers/CadViewer"),  { loading: Spinner });
 
 import dynamic from "next/dynamic";
 
@@ -225,6 +226,7 @@ export default function FileViewer({ locale, presetFormat }: Props) {
         {engine === "ebook"        && <EbookViewer file={file} />}
         {engine === "pptx"         && <PptxViewer file={file} />}
         {engine === "psd"          && <PsdViewer file={file} />}
+        {engine === "cad"          && <CadViewer file={file} />}
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ export type ViewerCategory =
 export type ViewerEngine =
   | 'native-image' | 'svg' | 'pdf' | 'docx' | 'spreadsheet'
   | 'text' | 'archive' | 'email' | 'video' | 'audio'
-  | 'psd' | 'ebook' | 'pptx';
+  | 'psd' | 'ebook' | 'pptx' | 'cad';
 
 export interface ViewerFormat {
   ext: string;
@@ -78,6 +78,7 @@ export const VIEWER_REGISTRY: ViewerFormat[] = [
   { ext: 'm4a',   name: 'M4A',           category: 'audio',        engine: 'audio',        mimeTypes: ['audio/mp4'],                                                                              description: 'MPEG-4 Audio' },
   // ── Archives ─────────────────────────────────────────────────────────────
   { ext: 'zip',   name: 'ZIP',           category: 'archive',      engine: 'archive',      mimeTypes: ['application/zip'],                                                                        description: 'ZIP Archive' },
+  { ext: 'rar',   name: 'RAR',           category: 'archive',      engine: 'archive',      mimeTypes: ['application/vnd.rar', 'application/x-rar-compressed'],                                   description: 'RAR Archive' },
   // ── Email ─────────────────────────────────────────────────────────────────
   { ext: 'eml',   name: 'EML',           category: 'email',        engine: 'email',        mimeTypes: ['message/rfc822'],                                                                         description: 'Email Message' },
   // ── Code ─────────────────────────────────────────────────────────────────
@@ -88,7 +89,7 @@ export const VIEWER_REGISTRY: ViewerFormat[] = [
   { ext: 'yaml',  name: 'YAML',          category: 'code',         engine: 'text',         mimeTypes: ['application/yaml'],                                                                       description: 'YAML Configuration File' },
   { ext: 'sql',   name: 'SQL',           category: 'code',         engine: 'text',         mimeTypes: ['application/sql'],                                                                        description: 'SQL Script' },
   // ── CAD & Vector ─────────────────────────────────────────────────────────
-  { ext: 'dxf',   name: 'DXF',           category: 'cad',          engine: 'text',         mimeTypes: ['image/vnd.dxf'],                                                                          description: 'Drawing Exchange Format' },
+  { ext: 'dxf',   name: 'DXF',           category: 'cad',          engine: 'cad',          mimeTypes: ['image/vnd.dxf'],                                                                          description: 'Drawing Exchange Format' },
   // ── eBook ─────────────────────────────────────────────────────────────────
   { ext: 'epub',  name: 'EPUB',          category: 'ebook',        engine: 'ebook',        mimeTypes: ['application/epub+zip'],                                                                   description: 'Electronic Publication' },
 ];
