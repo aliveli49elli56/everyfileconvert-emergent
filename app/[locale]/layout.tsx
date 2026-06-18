@@ -3,8 +3,7 @@ import { notFound } from 'next/navigation';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/sonner';
-import SidebarAds from '@/components/ads/sidebar-ads';
-import LeaderboardAd from '@/components/ads/leaderboard-ad';
+import AdSlot from '@/components/ads/ad-slot';
 import { locales, defaultLocale, getDictionary, isRTL, getHreflangLinks } from '@/lib/i18n/config';
 import type { Locale } from '@/lib/i18n/config';
 
@@ -76,13 +75,58 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         ))}
         <link rel="alternate" hrefLang="x-default" href="https://everyfileconvert.com/en" />
       </head>
-      <body className="min-h-screen flex flex-col xl:px-44">
-        <SidebarAds />
+      {/*
+        Body has NO horizontal padding — the 3-column grid below handles spacing.
+        Navbar and Footer span full width outside the grid.
+      */}
+      <body className="min-h-screen flex flex-col">
         <Navbar locale={locale as Locale} />
-        <div className="flex-1">
-          <LeaderboardAd />
-          {children}
+
+        {/*
+          3-column page layout (lg and above):
+          [160px sidebar] [main content] [160px sidebar]
+          Sidebars are hidden on mobile/tablet (hidden lg:block).
+          Leaderboard ad is INTENTIONALLY REMOVED per placement policy.
+        */}
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-[160px_minmax(0,1fr)_160px] items-start">
+
+          {/* ── Left Sidebar — 160×600 Sticky Banner ── */}
+          <aside
+            className="hidden lg:flex flex-col items-center pt-8"
+            aria-label="Left sidebar advertisement"
+          >
+            {/* <!-- REKLAM KODU BURAYA GELECEK --> */}
+            <div className="sticky top-20">
+              <AdSlot
+                adUnit="left-sidebar-160x600"
+                width={160}
+                height={600}
+              />
+            </div>
+          </aside>
+
+          {/* ── Main Content ── */}
+          <div className="min-w-0">
+            {children}
+          </div>
+
+          {/* ── Right Sidebar — 160×600 Sticky Banner ── */}
+          <aside
+            className="hidden lg:flex flex-col items-center pt-8"
+            aria-label="Right sidebar advertisement"
+          >
+            {/* <!-- REKLAM KODU BURAYA GELECEK --> */}
+            <div className="sticky top-20">
+              <AdSlot
+                adUnit="right-sidebar-160x600"
+                width={160}
+                height={600}
+              />
+            </div>
+          </aside>
+
         </div>
+
         <Footer locale={locale as Locale} />
         <Toaster position="bottom-right" />
       </body>

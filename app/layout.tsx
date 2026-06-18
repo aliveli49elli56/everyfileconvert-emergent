@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="tr">
+    <html lang="en">
       <head>
         {/* Google AdSense */}
         <script
@@ -24,7 +24,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
 
-        {/* Google Analytics - Next.js Yöntemiyle */}
+        {/* Google Analytics */}
         <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-8200B0JX4N"
@@ -38,7 +38,13 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={inter.className}>
+      {/*
+        Body classes are intentionally minimal here.
+        The [locale]/layout.tsx is responsible for the full body structure
+        (lang, dir, flex layout). The font class is the ONLY class applied here
+        to avoid hydration mismatches — locale layout will inherit it.
+      */}
+      <body className={inter.className} suppressHydrationWarning>
         {children}
       </body>
     </html>

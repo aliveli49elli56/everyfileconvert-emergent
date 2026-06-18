@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import UniversalDropzone from "@/components/UniversalDropzone";
 import FormatSelector from "@/components/FormatSelector";
+import AdSlot from "@/components/ads/ad-slot";
 import {
   CONVERSION_MATRIX,
   FORMAT_REGISTRY,
@@ -59,7 +60,8 @@ export default function HomeClient({ dict, locale }: { dict: DictType; locale: L
 
   return (
     <div className="min-h-screen">
-      <section className="relative hero-gradient overflow-hidden xl:-mx-44 -mt-[122px] pt-[122px]">
+      {/* ── Hero / UniversalDropzone Section ── */}
+      <section className="relative hero-gradient overflow-hidden -mt-[122px] pt-[122px]">
         <div className="absolute inset-0 bg-grid-slate-200/50 [mask-image:linear-gradient(0deg,transparent,black)]" />
         <div className="container relative mx-auto px-4 pt-4 pb-10 sm:pt-6 sm:pb-12">
           <div className="max-w-3xl mx-auto text-center space-y-6">
@@ -85,6 +87,17 @@ export default function HomeClient({ dict, locale }: { dict: DictType; locale: L
         </div>
       </section>
 
+      {/*
+        ── AD SLOT: drag_menu_under ──────────────────────────────────────────
+        Desktop: 336×280 centered between the Dropzone and All-In-One Tools.
+        Mobile : Same slot, max-width 336px, wrapped in z-0 + my-8 safety margin.
+        <!-- REKLAM KODU BURAYA GELECEK -->
+      */}
+      <div className="relative z-0 flex justify-center my-8 py-1" data-testid="ad-drag-menu-under">
+        <AdSlot adUnit="drag_menu_under-336x280" width={336} height={280} />
+      </div>
+
+      {/* ── All-In-One Tools Section ── */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -97,7 +110,54 @@ export default function HomeClient({ dict, locale }: { dict: DictType; locale: L
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {categories.map((category) => (
+            {/* First two cards: Image Converter (0) + Video Converter (1) */}
+            {categories.slice(0, 2).map((category) => (
+              <Link key={category.nameKey} href={category.href}>
+                <div className="category-card h-full group">
+                  <div className="relative z-10">
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center mb-4 shadow-lg transition-transform group-hover:scale-110`}>
+                      <category.icon className="h-7 w-7 text-white" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-slate-900 mb-2">
+                      {cats?.[category.nameKey] || category.nameKey}
+                    </h3>
+                    <p className="text-slate-600 text-sm mb-4">
+                      {cats?.[category.descKey] || category.descKey}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {category.features.map((feature) => (
+                        <Badge key={feature} variant="secondary" className={`text-xs ${category.bgColor} border border-slate-200`}>
+                          {feature}
+                        </Badge>
+                      ))}
+                    </div>
+                    <div className="flex items-center text-blue-600 font-medium text-sm mt-4 group-hover:translate-x-1 transition-transform">
+                      {cats?.getStarted || "Get Started"}
+                      <ArrowRight className="ml-1 h-4 w-4" />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+
+            {/*
+              ── AD SLOT: tools_infeed_1 ────────────────────────────────────
+              Mobile-only: appears between Video Converter and Audio Converter.
+              Hidden on sm+ so it never disrupts the 2- or 3-column grid.
+              Safety margin: my-8 (32px top+bottom), relative z-0.
+              <!-- REKLAM KODU BURAYA GELECEK -->
+            */}
+            <div
+              className="block sm:hidden relative z-0 my-8 col-span-1"
+              data-testid="ad-tools-infeed"
+            >
+              <div className="flex justify-center">
+                <AdSlot adUnit="tools_infeed_1-300x250" width={300} height={250} />
+              </div>
+            </div>
+
+            {/* Remaining cards: Audio Converter (2) onwards */}
+            {categories.slice(2).map((category) => (
               <Link key={category.nameKey} href={category.href}>
                 <div className="category-card h-full group">
                   <div className="relative z-10">
@@ -147,7 +207,7 @@ export default function HomeClient({ dict, locale }: { dict: DictType; locale: L
         </div>
       </section>
 
-      <section className="py-12 xl:-mx-44 bg-gradient-to-br from-sky-50 via-blue-50 to-yellow-50/40">
+      <section className="py-12 bg-gradient-to-br from-sky-50 via-blue-50 to-yellow-50/40">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-3">

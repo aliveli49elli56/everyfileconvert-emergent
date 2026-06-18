@@ -32,6 +32,7 @@ export default function AdSlot({
 
   if (isProduction) {
     return (
+      /* <!-- REKLAM KODU BURAYA GELECEK --> */
       <ins
         ref={adRef}
         className={`adsbygoogle ${className}`}
@@ -48,25 +49,20 @@ export default function AdSlot({
     );
   }
 
+  // Development placeholder
   return (
     <div
-      className={`relative flex items-center justify-center bg-slate-100 border-2 border-dashed border-slate-300 rounded-lg ${className}`}
-      style={{
-        width: `${width}px`,
-        height: `${height}px`,
-      }}
+      className={`relative flex flex-col items-center justify-center bg-slate-50 border border-dashed border-slate-200 rounded-lg overflow-hidden ${className}`}
+      style={{ width: `${width}px`, height: `${height}px` }}
+      data-testid={`ad-slot-${adUnit}`}
     >
-      <div className="text-center p-2">
-        <p className="text-xs font-medium text-slate-400 uppercase tracking-wide">
-          Ad Placeholder
-        </p>
-        <p className="text-[10px] text-slate-400 mt-1">
-          {width}x{height}
-        </p>
-        <p className="text-[10px] text-slate-300 mt-1">
-          {adUnit}
-        </p>
-      </div>
+      {/* <!-- REKLAM KODU BURAYA GELECEK --> */}
+      <p className="text-[10px] text-gray-400 tracking-widest uppercase font-medium">
+        Advertisement
+      </p>
+      <p className="text-[9px] text-gray-300 mt-1 tracking-wide">
+        {width} × {height}
+      </p>
     </div>
   );
 }
