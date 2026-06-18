@@ -5,10 +5,6 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import {
   Upload,
-  FileVideo,
-  FileAudio,
-  Image,
-  FileText,
   ArrowRight,
   Shield,
   Zap,
@@ -60,9 +56,9 @@ export default function HomeClient({ dict, locale }: { dict: DictType; locale: L
 
   return (
     <div className="min-h-screen">
-      <section className="relative hero-gradient overflow-hidden">
+      <section className="relative hero-gradient overflow-hidden xl:-mx-44 -mt-[122px] pt-[122px]">
         <div className="absolute inset-0 bg-grid-slate-200/50 [mask-image:linear-gradient(0deg,transparent,black)]" />
-        <div className="container relative mx-auto px-4 py-12 sm:py-16 lg:py-20">
+        <div className="container relative mx-auto px-4 pt-4 pb-10 sm:pt-6 sm:pb-12">
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <div className="space-y-4">
               <Badge variant="secondary" className="px-4 py-1.5 text-sm font-medium bg-white/80 backdrop-blur border border-slate-200">
@@ -80,26 +76,8 @@ export default function HomeClient({ dict, locale }: { dict: DictType; locale: L
           </div>
 
           {/* UniversalDropzone with glassmorphism design */}
-          <div ref={dropzoneRef} className="mt-10 max-w-2xl mx-auto">
+          <div ref={dropzoneRef} className="mt-6 max-w-2xl mx-auto">
             <UniversalDropzone mode="all" />
-
-            {/* Trust badge — below the dropzone */}
-            <div className="mt-5 flex items-center justify-center gap-3">
-              <div className="flex -space-x-2.5">
-                {["bg-emerald-500", "bg-violet-500", "bg-rose-500", "bg-amber-500"].map((color, i) => (
-                  <div key={i} className={`w-7 h-7 rounded-full ${color} border-2 border-white flex items-center justify-center shadow-sm`}>
-                    {i === 0 && <Image className="h-3 w-3 text-white" />}
-                    {i === 1 && <FileVideo className="h-3 w-3 text-white" />}
-                    {i === 2 && <FileAudio className="h-3 w-3 text-white" />}
-                    {i === 3 && <FileText className="h-3 w-3 text-white" />}
-                  </div>
-                ))}
-              </div>
-              <div className="flex items-center gap-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-slate-200 px-3.5 py-1.5 shadow-sm">
-                <span className="text-xs font-bold text-slate-900">100M+</span>
-                <span className="text-xs text-slate-500">{hero?.filesConverted || "files converted"}</span>
-              </div>
-            </div>
           </div>
         </div>
       </section>
