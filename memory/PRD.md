@@ -69,3 +69,28 @@ Multi-language (17 locales), programmatic SEO, zero server-side processing.
 - P2: Add RAR/7z archive viewer
 - P2: PPTX visual rendering (currently text-only XML parse)
 - P2: PSD layer preview panel
+
+## Prioritized Backlog
+
+### Phase 1 — Complete
+- Vietnamese locale removal, pdfjs fix, EbookEngine, FormatSelector, Online Viewer (53+ formats), View History, next build ✅
+
+### Phase 2 — In Progress
+- Visual PPTX renderer (XML → HTML/CSS layout with thumbnail strip)
+- Engine testing with real files (PDF, XLSX, PPTX, PSD, EML)
+
+### Phase 3: High-Complexity Engine Integration — QUEUED
+
+**Status: QUEUED — Awaiting execution in Phase 3**
+
+**DWG/DXF Viewer:**
+- Integrate open-design-sdk or equivalent WASM port
+- Strictly enforce 20MB mobile / 50MB desktop limits
+- Smart Redirection to Converter fallback for oversized files
+
+**Archive Viewer — RAR Support:**
+- Integrate unrar.js for RAR/RAR5 extraction and file listing
+- Extend ArchiveViewer.tsx to detect format and route to correct extractor
+- Same size limits + smart redirect fallback
+
+Objective: Complete CAD & Archive viewer categories with full client-side WASM engines.
