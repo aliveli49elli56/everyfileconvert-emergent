@@ -95,7 +95,19 @@ Multi-language (17 locales), programmatic SEO, zero server-side processing.
 - Visual PPTX renderer (XML → HTML/CSS layout with thumbnail strip) ✅
 - Footer format counts dynamically updated ✅
 
-### Phase 3 — COMPLETE (2025-06-18)
+### 2025-06-18: Static Ad Placement Architecture (NEW)
+- Completely redesigned layout for AdSense safety and optimal placement
+- **Layout restructure**: Removed `xl:px-44` body padding + old fixed-positioned `SidebarAds`
+- **Desktop 3-column grid**: `grid-cols-1 lg:grid-cols-[160px_minmax(0,1fr)_160px]` in layout.tsx
+- **Left/Right 160×600 sticky sidebars**: `hidden lg:flex` (hidden on mobile/tablet), `sticky top-20` scrolling behavior
+- **Leaderboard REMOVED**: `LeaderboardAd` completely removed from layout (per AdSense accidental-click policy)
+- **drag_menu_under 336×280**: Between UniversalDropzone hero and All-In-One Tools, `relative z-0 my-8`, universal (desktop + mobile)
+- **tools_infeed_1 300×250**: Mobile-only (`block sm:hidden`), between Video Converter and Audio Converter cards in grid — `relative z-0 my-8` safety margin
+- **AdSlot placeholder redesign**: `bg-slate-50`, `text-[10px] text-gray-400 tracking-widest uppercase`, "ADVERTISEMENT" label + dimensions
+- **HTML comments**: `{/* <!-- REKLAM KODU BURAYA GELECEK --> */}` in all ad slot locations
+- **suppressHydrationWarning**: Added to root layout body to prevent i18n/font className mismatch warning
+- HomeClient.tsx: Removed all `xl:-mx-44` negative margins (no longer needed without body padding)
+
 - DXF CAD Viewer with SVG rendering, zoom controls, dark canvas ✅
 - RAR Archive Viewer with node-unrar-js WASM ✅
 
