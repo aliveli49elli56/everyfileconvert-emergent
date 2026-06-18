@@ -205,15 +205,12 @@ async function addWatermark(
   return new Blob([bytes], { type: 'application/pdf' });
 }
 
-async function pdfToWord(
+async function pdfExtractText(
   file: File,
   onProgress?: (n: number) => void,
-): Promise<Blob> {
+): Promise<string[]> {
   onProgress?.(10);
-
-  // Step 1: Load PDF with pdfjs-dist for proper text extraction
   const { getDocument, GlobalWorkerOptions } = await import('pdfjs-dist');
-  // Point to the worker file served from Next.js public/ directory
   GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
   onProgress?.(20);
 
@@ -223,64 +220,96 @@ async function pdfToWord(
   onProgress?.(30);
 
   const totalPages = pdf.numPages;
-  const allParagraphs: string[] = [];
+  const allLines: string[] = [];
 
-  // Step 2: Extract text page by page
   for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
     const page = await pdf.getPage(pageNum);
     const textContent = await page.getTextContent();
-    // Concatenate text items, preserving line breaks
     let pageText = '';
     let lastY = -1;
     for (const item of textContent.items as Array<{ str: string; transform?: number[] }>) {
       const y = item.transform ? Math.round(item.transform[5]) : 0;
-      if (lastY !== -1 && Math.abs(y - lastY) > 5) {
-        pageText += '\n';
-      }
+      if (lastY !== -1 && Math.abs(y - lastY) > 5) pageText += '\n';
       pageText += item.str;
       lastY = y;
     }
     if (pageText.trim()) {
-      allParagraphs.push(`--- Page ${pageNum} ---`);
-      // Split by newline and filter empty
-      pageText.split('\n').filter(l => l.trim()).forEach(l => allParagraphs.push(l.trim()));
+      allLines.push(`--- Page ${pageNum} ---`);
+      pageText.split('\n').filter(l => l.trim()).forEach(l => allLines.push(l.trim()));
     }
     onProgress?.(30 + Math.round((pageNum / totalPages) * 40));
   }
   onProgress?.(72);
+  return allLines;
+}
 
-  // Step 3: Build DOCX with 'docx' library
-  const { Document, Paragraph, TextRun, Packer, HeadingLevel } = await import('docx');
-  const docChildren = allParagraphs.map(line => {
-    if (line.startsWith('--- Page')) {
-      return new Paragraph({
-        heading: HeadingLevel.HEADING_2,
-        children: [new TextRun({ text: line, bold: true })],
-        spacing: { before: 400 },
-      });
-    }
-    return new Paragraph({
-      children: [new TextRun({ text: line })],
-      spacing: { after: 80 },
-    });
-  });
+async function pdfToWord(
+  file: File,
+  targetFormat: string,
+  onProgress?: (n: number) => void,
+): Promise<{ blob: Blob; ext: string }> {
+  const lines = await pdfExtractText(file, onProgress);
+  const title = file.name.replace(/\.[^.]+$/, '');
+  const tgt = targetFormat.toLowerCase();
 
-  if (docChildren.length === 0) {
-    docChildren.push(new Paragraph({
-      children: [new TextRun({ text: `Converted from: ${file.name}` })],
-    }));
+  // ── TXT ──────────────────────────────────────────────────────────────────
+  if (tgt === 'txt') {
+    const text = lines.join('\n');
+    return { blob: new Blob([text], { type: 'text/plain' }), ext: 'txt' };
   }
+
+  // ── HTML ─────────────────────────────────────────────────────────────────
+  if (tgt === 'html' || tgt === 'htm') {
+    const body = lines
+      .map(l => l.startsWith('--- Page')
+        ? `<h2>${l}</h2>`
+        : `<p>${l.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</p>`)
+      .join('\n');
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${title}</title>
+<style>body{font-family:Georgia,serif;max-width:800px;margin:40px auto;line-height:1.7;padding:0 20px}</style>
+</head><body><h1>${title}</h1>\n${body}</body></html>`;
+    return { blob: new Blob([html], { type: 'text/html' }), ext: 'html' };
+  }
+
+  // ── EPUB ─────────────────────────────────────────────────────────────────
+  if (tgt === 'epub') {
+    const { EbookEngine } = await import('./EbookEngine');
+    const blob = await EbookEngine.process({ files: [file], op: 'ebook:convert', options: { sourceFormat: 'pdf', targetFormat: 'epub' } }).then(r => r.blob);
+    return { blob, ext: 'epub' };
+  }
+
+  // ── RTF ──────────────────────────────────────────────────────────────────
+  if (tgt === 'rtf') {
+    const rtfLines = lines.map(l => `${l}\\par `).join('\n');
+    const rtf = `{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0 Times New Roman;}}\\f0\\fs24 ${rtfLines}}`;
+    return { blob: new Blob([rtf], { type: 'application/rtf' }), ext: 'rtf' };
+  }
+
+  // ── MD ───────────────────────────────────────────────────────────────────
+  if (tgt === 'md') {
+    const md = `# ${title}\n\n` + lines
+      .map(l => l.startsWith('--- Page') ? `\n## ${l}\n` : l)
+      .join('\n');
+    return { blob: new Blob([md], { type: 'text/markdown' }), ext: 'md' };
+  }
+
+  // ── DOCX (default) ───────────────────────────────────────────────────────
+  const { Document, Paragraph, TextRun, Packer, HeadingLevel } = await import('docx');
+  const docChildren = lines.length
+    ? lines.map(line => line.startsWith('--- Page')
+        ? new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun({ text: line, bold: true })], spacing: { before: 400 } })
+        : new Paragraph({ children: [new TextRun({ text: line })], spacing: { after: 80 } }))
+    : [new Paragraph({ children: [new TextRun({ text: `Converted from: ${file.name}` })] })];
 
   const docx = new Document({
     creator: 'EveryFileConvert',
-    title: file.name.replace('.pdf', ''),
+    title,
     sections: [{ properties: {}, children: docChildren }],
   });
-
   onProgress?.(90);
   const blob = await Packer.toBlob(docx);
   onProgress?.(100);
-  return blob;
+  return { blob, ext: 'docx' };
 }
 
 async function wordToPdf(
@@ -387,10 +416,13 @@ export const PdfDocEngine = {
         filename = buildOutputName(file.name, 'pdf');
         break;
 
-      case 'pdf:to-word':
-        blob     = await pdfToWord(file, onProgress);
-        filename = buildOutputName(file.name, 'docx');
+      case 'pdf:to-word': {
+        const tgt = options.targetFormat ?? 'docx';
+        const { blob: wordBlob, ext } = await pdfToWord(file, tgt, onProgress);
+        blob     = wordBlob;
+        filename = buildOutputName(file.name, ext);
         break;
+      }
 
       case 'doc:to-pdf':
         blob     = await wordToPdf(file, onProgress);
@@ -399,12 +431,22 @@ export const PdfDocEngine = {
 
       case 'doc:to-text': {
         onProgress?.(20);
+        const tgt = (options.targetFormat ?? 'txt').toLowerCase();
         const mammoth = (await import('mammoth')) as {
           extractRawText: (opts: { arrayBuffer: ArrayBuffer }) => Promise<{ value: string }>;
+          convertToHtml:  (opts: { arrayBuffer: ArrayBuffer }) => Promise<{ value: string }>;
         };
-        const { value } = await mammoth.extractRawText({ arrayBuffer: await file.arrayBuffer() });
-        blob     = new Blob([value], { type: 'text/plain' });
-        filename = buildOutputName(file.name, 'txt');
+        const buf = await file.arrayBuffer();
+
+        if (tgt === 'html' || tgt === 'htm') {
+          const { value } = await mammoth.convertToHtml({ arrayBuffer: buf });
+          blob     = new Blob([value], { type: 'text/html' });
+          filename = buildOutputName(file.name, 'html');
+        } else {
+          const { value } = await mammoth.extractRawText({ arrayBuffer: buf });
+          blob     = new Blob([value], { type: 'text/plain' });
+          filename = buildOutputName(file.name, 'txt');
+        }
         onProgress?.(100);
         break;
       }

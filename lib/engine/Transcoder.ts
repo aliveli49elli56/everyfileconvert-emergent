@@ -130,6 +130,7 @@ export function inferOp(sourceExt: string, targetExt: string): TranscodeOp {
   if (srcDomain === 'video') return 'video:convert';
   if (srcDomain === 'audio') return 'audio:convert';
   if (srcDomain === 'doc' && tgt === 'pdf') return 'doc:to-pdf';
+  if (srcDomain === 'doc' && (tgt === 'txt' || tgt === 'html' || tgt === 'htm')) return 'doc:to-text';
   if (srcDomain === 'pdf' && tgtDomain === 'doc') return 'pdf:to-word';
   if (srcDomain === 'pdf' && tgtDomain === 'ebook') return 'ebook:convert';
   if (srcDomain === 'pdf') return 'pdf:compress';
