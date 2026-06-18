@@ -7,10 +7,10 @@ interface FooterProps {
 }
 
 const categories = [
-  { name: "Video", icon: FileVideo, count: "8 formats" },
-  { name: "Audio", icon: FileAudio, count: "8 formats" },
-  { name: "Image", icon: Image, count: "12 formats" },
-  { name: "Document", icon: FileText, count: "14 formats" },
+  { name: "Video", icon: FileVideo, count: "16 formats" },
+  { name: "Audio", icon: FileAudio, count: "13 formats" },
+  { name: "Image", icon: Image, count: "22 formats" },
+  { name: "Document", icon: FileText, count: "24 formats" },
 ];
 
 export default function Footer({ locale }: FooterProps) {
