@@ -108,7 +108,12 @@ Multi-language (17 locales), programmatic SEO, zero server-side processing.
 - **suppressHydrationWarning**: Added to root layout body to prevent i18n/font className mismatch warning
 - HomeClient.tsx: Removed all `xl:-mx-44` negative margins (no longer needed without body padding)
 
-### 2025-06-18: Ad Layout Genişletme (Converter + Viewer Sayfaları)
+### 2025-06-18: Ad Bug Fixes
+- **drag_menu_under genişliği**: max-w-[336px] mx-auto ile 336px'e sabitlendi (önceden container genişliğine ~672px uzanıyordu)
+- **Sidebar sticky fix**: grid'den `items-start` kaldırıldı → aside default `stretch` ile içerik yüksekliğine (1879px) uzanıyor → sticky top-20 (80px) tüm sayfa boyunca çalışıyor
+- Verification: iteration_6.json — %100 başarı, scroll 500px/800px sticky=80px, aside=1879px>600px
+
+
 - **4 Converter sayfası** (video, audio, image, pdf-tools): `drag_menu_under` 336×280 slotu eklendi (dropzone ↔ Popular Conversions arası)
 - **Viewer Hub** (`/view`): `xl:-mx-44` temizlendi, `drag_menu_under` hero ↔ format grid arasına eklendi
 - **Viewer Slug** (`/view/[slug]`): `drag_menu_under` FileViewer/ViewHistory ↔ "How to use" arasına eklendi
