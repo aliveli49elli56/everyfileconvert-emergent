@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Eye } from "lucide-react";
 import Link from "next/link";
+import AdSlot from "@/components/ads/ad-slot";
 import { locales } from "@/lib/i18n/config";
 import { VIEWER_REGISTRY, getViewerByExt } from "@/lib/config/viewer-registry";
 import FileViewer from "@/components/viewer/FileViewer";
@@ -76,6 +77,15 @@ export default async function ViewerSlugPage({
         <div className="my-12">
           <FileViewer locale={locale} presetFormat={fmt.ext} />
           <ViewHistory locale={locale} />
+        </div>
+
+        {/*
+          AD: drag_menu_under — Viewer ile "How to use" arasında
+          my-8 güvenlik marjı, relative z-0 kaza tıklama koruması
+          <!-- REKLAM KODU BURAYA GELECEK -->
+        */}
+        <div className="relative z-0 flex justify-center my-8 py-1" data-testid="ad-drag-menu-under">
+          <AdSlot adUnit="drag_menu_under-336x280" width={336} height={280} />
         </div>
 
         {/* How to use */}

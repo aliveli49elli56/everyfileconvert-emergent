@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Eye } from "lucide-react";
+import AdSlot from "@/components/ads/ad-slot";
 import { locales, type Locale } from "@/lib/i18n/config";
 import { VIEWER_REGISTRY, getViewerCategories, VIEWER_CATEGORY_META } from "@/lib/config/viewer-registry";
 import ViewerHub from "@/components/viewer/ViewerHub";
@@ -28,7 +29,7 @@ export default async function ViewerHubPage({ params }: { params: Promise<{ loca
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="hero-gradient xl:-mx-44 -mt-[122px] pt-[122px]">
+      <section className="hero-gradient -mt-[122px] pt-[122px]">
         <div className="container mx-auto px-4 py-12 text-center">
           <div className="inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-1.5 text-sm font-semibold text-blue-700 mb-5">
             <Eye className="h-4 w-4" />
@@ -42,6 +43,14 @@ export default async function ViewerHubPage({ params }: { params: Promise<{ loca
           </p>
         </div>
       </section>
+
+      {/*
+        AD: drag_menu_under — Hero ile Hub Grid arasında
+        <!-- REKLAM KODU BURAYA GELECEK -->
+      */}
+      <div className="relative z-0 flex justify-center my-8 py-1" data-testid="ad-drag-menu-under">
+        <AdSlot adUnit="drag_menu_under-336x280" width={336} height={280} />
+      </div>
 
       {/* Hub grid */}
       <section className="container mx-auto px-4 py-12">
