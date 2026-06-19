@@ -368,6 +368,12 @@ export default function ConversionPageClient({
             <input ref={fileInputRef} type="file" className="hidden" accept={`.${parsed.inputFormat}`} onChange={handleFileSelect} />
           </div>
 
+          {/* Responsive ad banner — below converter card, all screen sizes */}
+          <div className="flex justify-center mb-10" data-testid="ad-conversion-below-dropzone">
+            {/* <!-- REKLAM KODU BURAYA GELECEK --> */}
+            <AdSlot adUnit="conversion_below_dropzone-336x280" width={336} height={280} />
+          </div>
+
           {/* Trust signals */}
           <div className="max-w-3xl mx-auto grid grid-cols-3 gap-4 mb-14">
             {[
