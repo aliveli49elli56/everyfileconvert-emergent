@@ -15,35 +15,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="tr">
       <head>
-        {/* Google AdSense */}
+        {/* Google AdSense - X'leri kendi ID'nizle değiştirmeyi unutmayın! */}
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
           crossOrigin="anonymous"
         />
 
-        {/* Google Analytics */}
+        {/* Yeni Google Analytics (G-W9Z08BRR2Q) */}
         <Script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=G-8200B0JX4N"
+          src="https://www.googletagmanager.com/gtag/js?id=G-W9Z08BRR2Q"
         />
         <Script id="google-analytics">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-8200B0JX4N');
+            gtag('config', 'G-W9Z08BRR2Q');
           `}
         </Script>
       </head>
-      {/*
-        Body classes are intentionally minimal here.
-        The [locale]/layout.tsx is responsible for the full body structure
-        (lang, dir, flex layout). The font class is the ONLY class applied here
-        to avoid hydration mismatches — locale layout will inherit it.
-      */}
       <body className={inter.className} suppressHydrationWarning>
         {children}
       </body>
