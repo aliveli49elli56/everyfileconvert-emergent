@@ -11,6 +11,7 @@ import {
   HelpCircle, ExternalLink,
 } from "lucide-react";
 import { toast } from "sonner";
+import AdSlot from "@/components/ads/ad-slot";
 import type { ParsedSlug, RelatedConversion } from "@/lib/config/master-registry";
 import { validateFileSize, revokeObjectURL, createDownloadUrl, triggerFileDownload } from "@/lib/file-validation";
 import { convertImage } from "@/lib/image-converter";
@@ -384,6 +385,11 @@ export default function ConversionPageClient({
 
           {/* How it works */}
           <div className="max-w-3xl mx-auto mb-14">
+            {/* Mobile-only infeed banner — after trust signals */}
+            <div className="md:hidden flex justify-center mb-8" data-testid="ad-conversion-page-mid-mobile">
+              {/* <!-- REKLAM KODU BURAYA GELECEK --> */}
+              <AdSlot adUnit="conversion_page_mid_mobile-336x280" width={336} height={280} />
+            </div>
             <Card className="border-slate-200 shadow-sm">
               <CardContent className="p-6 sm:p-8">
                 <h2 className="text-xl font-bold text-slate-900 mb-5">{howItWorksTitle}</h2>
@@ -420,6 +426,11 @@ export default function ConversionPageClient({
           {/* Related conversions */}
           {relatedConversions.length > 0 && (
             <div className="max-w-4xl mx-auto">
+              {/* Mobile-only infeed banner — before related conversions */}
+              <div className="md:hidden flex justify-center mb-8" data-testid="ad-conversion-page-bottom-mobile">
+                {/* <!-- REKLAM KODU BURAYA GELECEK --> */}
+                <AdSlot adUnit="conversion_page_bottom_mobile-336x280" width={336} height={280} />
+              </div>
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <div className="h-1 w-8 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500" />

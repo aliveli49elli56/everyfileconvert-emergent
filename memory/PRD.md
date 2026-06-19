@@ -124,6 +124,12 @@ Multi-language (17 locales), programmatic SEO, zero server-side processing.
 - DXF CAD Viewer with SVG rendering, zoom controls, dark canvas ✅
 - RAR Archive Viewer with node-unrar-js WASM ✅
 
+### 2026-06-18: Format Sayfalarına (slug) Mobile-Only Banner
+- **Kapsam**: Tüm bireysel format dönüşüm sayfaları (`mov-to-mp4`, `heic-to-jpg`, `wav-to-mp3`, `docx-to-pdf` vb.) TEK bir şablon `ConversionPageClient.tsx` kullanıyor → 1 değişiklik = yüzlerce sayfa
+- **Banner 1**: Trust signals (100% Private/Instant/No Account) altına, "How it works"tan önce → `ad-conversion-page-mid-mobile`
+- **Banner 2**: FAQ ile Related Conversions arasına → `ad-conversion-page-bottom-mobile`
+- Her ikisi de `md:hidden` (sadece mobil), 336×280, AdSlot bileşeni
+
 ### 2026-06-18: Video/Audio Dönüşüm Hatası Düzeltildi
 - **Root Cause**: COEP `require-corp` başlığı tarayıcıda `unpkg.com` CDN fetch'ini engelliyordu; worker hata string döndürüyor, Transcoder Error nesne kontrol ediyor → "Transcoding failed" fallback
 - **Fix 1**: `@ffmpeg/core@0.12.6` install + `ffmpeg-core.js` & `ffmpeg-core.wasm` → `/public/ffmpeg/` (same-origin, COEP bypass)
