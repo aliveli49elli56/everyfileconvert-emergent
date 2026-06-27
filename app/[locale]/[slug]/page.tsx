@@ -11,6 +11,8 @@ import { getDictionary, getHreflangLinks, pickVariant } from "@/lib/i18n/config"
 import type { Locale } from "@/lib/i18n/config";
 import ConversionPageClient from "./ConversionPageClient";
 
+export const dynamicParams = true;
+
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
 }
@@ -100,12 +102,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       languages: Object.fromEntries(hreflangs.map(({ locale: l, href }) => [l, href])),
     },
   };
-}
-
-export async function generateStaticParams() {
-  const slugs = getAllConversionSlugs();
-  const locales = ["en", "tr", "de", "fr", "es", "it", "pt", "ja", "zh", "nl", "pl", "ko", "sv", "da", "no", "hu", "fi"];
-  return locales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })));
 }
 
 export default async function ConversionPage({ params }: PageProps) {

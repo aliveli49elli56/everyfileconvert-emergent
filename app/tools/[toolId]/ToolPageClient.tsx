@@ -16,15 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  ChevronLeft,
-  Upload,
-  X,
-  Cpu,
-  Loader2,
-  Clock,
-  FileQuestion,
-} from "lucide-react";
+import { ChevronLeft, Upload, X, Cpu, Loader as Loader2, Clock, FileQuestion } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import {
@@ -399,15 +391,13 @@ export default function ToolPageClient({ toolId }: { toolId: string }) {
   const tool = getToolById(toolId);
   const Icon = tool?.icon ?? Upload;
 
-  if (!tool) return null;
-
   const [files, setFiles] = useState<File[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleFiles = useCallback((incoming: File[]) => {
-    setFiles((prev) => (tool.multiFile ? [...prev, ...incoming] : incoming));
-  }, [tool.multiFile]);
+    setFiles((prev) => (tool?.multiFile ? [...prev, ...incoming] : incoming));
+  }, [tool?.multiFile]);
 
   const removeFile = (index: number) => {
     setFiles((prev) => prev.filter((_, i) => i !== index));
@@ -424,6 +414,8 @@ export default function ToolPageClient({ toolId }: { toolId: string }) {
   };
 
   const hasFiles = files.length > 0;
+
+  if (!tool) return null;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">

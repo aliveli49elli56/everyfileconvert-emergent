@@ -4,7 +4,7 @@ import { getToolById, getAllToolIds } from "@/lib/tools/registry";
 import ToolPageClient from "./ToolPageClient";
 
 interface Props {
-  params: { toolId: string };
+  params: Promise<{ toolId: string }>;
 }
 
 export async function generateStaticParams() {
@@ -12,7 +12,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const tool = getToolById(params.toolId);
+  const { toolId } = await params;
+  const tool = getToolById(toolId);
   if (!tool) return {};
   return {
     title: `${tool.name} — Free Online Tool | EveryFileConvert`,
@@ -20,9 +21,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function ToolPage({ params }: Props) {
-  const tool = getToolById(params.toolId);
+export default async function ToolPage({ params }: Props) {
+  const { toolId } = await params;
+  const tool = getToolById(toolId);
   if (!tool) notFound();
-  // Only pass the string ID — the client resolves the full definition from the registry
-  return <ToolPageClient toolId={params.toolId} />;
+  return <ToolPageClient toolId={toolId} />;
 }

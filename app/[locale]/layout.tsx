@@ -1,11 +1,15 @@
+import Script from 'next/script';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { Inter } from 'next/font/google';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/sonner';
 import AdSlot from '@/components/ads/ad-slot';
 import { locales, defaultLocale, getDictionary, isRTL, getHreflangLinks } from '@/lib/i18n/config';
 import type { Locale } from '@/lib/i18n/config';
+
+const inter = Inter({ subsets: ['latin', 'latin-ext'] });
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
@@ -23,6 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const hreflangs = getHreflangLinks('');
 
   return {
+    metadataBase: new URL('https://everyfileconvert.com'),
     title: meta?.homeTitle || 'EveryFileConvert - Free Online File Converter',
     description: meta?.homeDesc || 'Convert any file format instantly in your browser.',
     keywords: 'file converter, video converter, audio converter, image converter, pdf converter, free converter, online converter',
@@ -68,65 +73,45 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const hreflangs = getHreflangLinks('');
 
   return (
-    <html lang={locale} dir={rtl ? 'rtl' : 'ltr'}>
+    <html lang={locale} dir={rtl ? 'rtl' : 'ltr'} suppressHydrationWarning>
       <head>
         {hreflangs.map(({ locale: l, href }) => (
           <link key={l} rel="alternate" hrefLang={l} href={href} />
         ))}
         <link rel="alternate" hrefLang="x-default" href="https://everyfileconvert.com/en" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+          crossOrigin="anonymous"
+        />
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-W9Z08BRR2Q"
+        />
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-W9Z08BRR2Q');
+          `}
+        </Script>
       </head>
-      {/*
-        Body has NO horizontal padding — the 3-column grid below handles spacing.
-        Navbar and Footer span full width outside the grid.
-      */}
-      <body className="min-h-screen flex flex-col">
+      <body className={`${inter.className} min-h-screen flex flex-col`} suppressHydrationWarning>
         <Navbar locale={locale as Locale} />
-
-        {/*
-          3-column page layout (lg and above):
-          [160px sidebar] [main content] [160px sidebar]
-          Sidebars are hidden on mobile/tablet (hidden lg:block).
-          Leaderboard ad is INTENTIONALLY REMOVED per placement policy.
-        */}
         <div className="flex-1 grid grid-cols-1 lg:grid-cols-[160px_minmax(0,1fr)_160px]">
-
-          {/* ── Left Sidebar — 160×600 Sticky Banner ── */}
-          <aside
-            className="hidden lg:block pt-8"
-            aria-label="Left sidebar advertisement"
-          >
-            {/* <!-- REKLAM KODU BURAYA GELECEK --> */}
+          <aside className="hidden lg:block pt-8" aria-label="Left sidebar advertisement">
             <div className="sticky top-20 flex justify-center">
-              <AdSlot
-                adUnit="left-sidebar-160x600"
-                width={160}
-                height={600}
-              />
+              <AdSlot adUnit="left-sidebar-160x600" width={160} height={600} />
             </div>
           </aside>
-
-          {/* ── Main Content ── */}
-          <div className="min-w-0">
-            {children}
-          </div>
-
-          {/* ── Right Sidebar — 160×600 Sticky Banner ── */}
-          <aside
-            className="hidden lg:block pt-8"
-            aria-label="Right sidebar advertisement"
-          >
-            {/* <!-- REKLAM KODU BURAYA GELECEK --> */}
+          <div className="min-w-0">{children}</div>
+          <aside className="hidden lg:block pt-8" aria-label="Right sidebar advertisement">
             <div className="sticky top-20 flex justify-center">
-              <AdSlot
-                adUnit="right-sidebar-160x600"
-                width={160}
-                height={600}
-              />
+              <AdSlot adUnit="right-sidebar-160x600" width={160} height={600} />
             </div>
           </aside>
-
         </div>
-
         <Footer locale={locale as Locale} />
         <Toaster position="bottom-right" />
       </body>

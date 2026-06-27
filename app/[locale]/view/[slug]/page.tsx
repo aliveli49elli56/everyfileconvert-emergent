@@ -8,15 +8,7 @@ import { VIEWER_REGISTRY, getViewerByExt } from "@/lib/config/viewer-registry";
 import FileViewer from "@/components/viewer/FileViewer";
 import ViewHistory from "@/components/viewer/ViewHistory";
 
-export async function generateStaticParams() {
-  const params: { locale: string; slug: string }[] = [];
-  for (const locale of locales) {
-    for (const fmt of VIEWER_REGISTRY) {
-      params.push({ locale, slug: fmt.ext });
-    }
-  }
-  return params;
-}
+export const dynamicParams = true;
 
 export async function generateMetadata({
   params,
